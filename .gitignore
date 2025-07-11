@@ -13,7 +13,4 @@ dist
 *.pkl
 
 # Files
-publications
-*.pdf
-*.pptx
-*.docx
+*.parquet
