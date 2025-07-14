@@ -9,7 +9,8 @@ The goal here is to have a simple collection of scientific papers in plain text 
 Please refer to the original repository ([https://github.com/shauryr/ACL-anthology-corpus/](https://github.com/shauryr/ACL-anthology-corpus/)) for all the details and the original contents (incl. revisions).
 
 ## Data Processing Steps
-1. 
+1. Download ```acl-publication-info.74k.v2.parquet``` from [https://huggingface.co/datasets/WINGNUS/ACL-OCL](https://huggingface.co/datasets/WINGNUS/ACL-OCL).
+2. Place the file in this folder.
 
 ## Attribution
 
