@@ -18,7 +18,8 @@ if __name__ == "__main__":
     # Load embedded papers
     embedded_papers_path = Path(".", "sem_similarity", "embedded_papers.jsonl")
     # model = SentenceTransformer("ibm-granite/granite-embedding-english-r2")
-    model = SentenceTransformer("Qwen/Qwen3-Embedding-0.6B")
+    # model = SentenceTransformer("Qwen/Qwen3-Embedding-0.6B")
+    model = SentenceTransformer("Alibaba-NLP/gte-Qwen2-1.5B-instruct")
     
     # Compute Embeddings
     embeddings = []
@@ -44,6 +45,6 @@ if __name__ == "__main__":
             print(f"Similarity between {paper_a['paper_id']} and {paper_b['paper_id']}: {similarity_float}")
             to_save["similarity_scores"][paper_b["paper_id"]] = similarity_float
             
-        to_save["embedding"].pop()  # Remove embedding before saving as tensors are not JSON serializable
+        del to_save["embedding"]  # Remove embedding before saving as tensors are not JSON serializable
 
         utils.append_to_jsonl(to_save, embedded_papers_path)    
