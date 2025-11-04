@@ -21,6 +21,7 @@ def save_json(data: dict, file_path: str | Path, indent: int = 2) -> None:
 
 
 def build_prompt(payload: str, task="summarisation") -> str:
+    base_prompt = ("")
     if task == "summarisation":
         base_prompt = (
             "Summarise the following scientific article from the Association for "
