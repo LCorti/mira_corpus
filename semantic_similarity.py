@@ -17,7 +17,8 @@ if __name__ == "__main__":
     """
     # Load embedded papers
     embedded_papers_path = Path(".", "sem_similarity", "embedded_papers.jsonl")
-    model = SentenceTransformer("ibm-granite/granite-embedding-english-r2")
+    # model = SentenceTransformer("ibm-granite/granite-embedding-english-r2")
+    model = SentenceTransformer("Qwen/Qwen3-Embedding-0.6B")
     
     # Compute Embeddings
     embeddings = []
