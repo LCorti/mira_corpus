@@ -5,7 +5,7 @@ from pathlib import Path
 
 if __name__ == "__main__":
     # Load papers
-    papers_path = Path(".", "data_scisumm", "cl_scisumm_short.jsonl")
+    papers_path = Path(".", "data_scisumm", "cl_scisumm_med.jsonl")
     papers = utils.load_jsonl(papers_path)
     """
     [{
