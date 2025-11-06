@@ -32,8 +32,8 @@ if __name__ == "__main__":
         processed_ids = []
     
     # model = SentenceTransformer("ibm-granite/granite-embedding-english-r2")
-    # model = SentenceTransformer("Qwen/Qwen3-Embedding-0.6B")
-    model = SentenceTransformer("Alibaba-NLP/gte-Qwen2-1.5B-instruct")
+    model = SentenceTransformer("Qwen/Qwen3-Embedding-0.6B")
+    # model = SentenceTransformer("Alibaba-NLP/gte-Qwen2-1.5B-instruct")
     
     # Compute Embeddings
     embeddings = []
