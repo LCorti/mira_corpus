@@ -3,7 +3,7 @@
 Convert scientific papers JSONL files to parquet format for Hugging Face datasets.
 Supports two formats:
 1. gpt_simplified.jsonl - contains simplified summaries
-2. gpt_summaries.jsonl - contains full summaries with F1 scores
+2. gpt_summaries.jsonl - contains full summaries
 
 Each sample represents one paper with its metadata and different types of summaries.
 """
@@ -88,7 +88,6 @@ def convert_simplified_jsonl_to_parquet(input_path: str, output_path: str, num_s
 def convert_summaries_jsonl_to_parquet(input_path: str, output_path: str, num_samples: Optional[int] = None):
     """
     Convert gpt_summaries.jsonl file to parquet format.
-    This version includes F1 scores and different field names.
     
     Args:
         input_path: Path to the input JSONL file
@@ -111,8 +110,7 @@ def convert_summaries_jsonl_to_parquet(input_path: str, output_path: str, num_sa
                     'abstract': paper.get('abstract', ''),
                     'full_text': paper.get('text', ''),
                     'human_summary': paper.get('human', ''),
-                    'gpt_summary': paper.get('gpt_summary', ''),
-                    'f1_score': paper.get('f1', None)
+                    'gpt_summary': paper.get('gpt_summary', '')
                 }
                 
                 papers.append(paper_data)
@@ -144,9 +142,6 @@ def convert_summaries_jsonl_to_parquet(input_path: str, output_path: str, num_sa
     print(f"Papers with abstracts: {df['abstract'].notna().sum()}")
     print(f"Papers with human summaries: {df['human_summary'].notna().sum()}")
     print(f"Papers with GPT summaries: {df['gpt_summary'].notna().sum()}")
-    if 'f1_score' in df.columns:
-        print(f"Papers with F1 scores: {df['f1_score'].notna().sum()}")
-        print(f"Average F1 score: {df['f1_score'].mean():.4f}")
     
     # Show sample of data
     print(f"\nSample paper IDs: {df['paper_id'].head().tolist()}")
