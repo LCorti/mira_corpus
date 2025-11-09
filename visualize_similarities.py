@@ -226,7 +226,7 @@ Most similar pairs:
 def main():
     # Paths
     embedded_papers_path = Path(".", "sem_similarity", "embedded_papers.jsonl")
-    papers_path = Path(".", "data_scisumm", "cl_scisumm_short.jsonl")
+    papers_path = Path(".", "data_scisumm", "cl_scisumm.jsonl")
     
     # Load data
     print("Loading similarity data...")

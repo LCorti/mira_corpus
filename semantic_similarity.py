@@ -12,7 +12,7 @@ from pathlib import Path
 
 if __name__ == "__main__":
     # Load papers
-    papers_path = Path(".", "data_scisumm", "cl_scisumm_questions.jsonl")
+    papers_path = Path(".", "data_scisumm", "cl_scisumm.jsonl")
     papers = utils.load_jsonl(papers_path)
     """
     [{
@@ -32,8 +32,8 @@ if __name__ == "__main__":
         processed_ids = []
     
     # model = SentenceTransformer("ibm-granite/granite-embedding-english-r2")
-    # model = SentenceTransformer("Qwen/Qwen3-Embedding-0.6B")
-    model = SentenceTransformer("Alibaba-NLP/gte-Qwen2-1.5B-instruct")
+    model = SentenceTransformer("Qwen/Qwen3-Embedding-0.6B")
+    # model = SentenceTransformer("Alibaba-NLP/gte-Qwen2-1.5B-instruct")
     
     # Compute Embeddings
     embeddings = []
