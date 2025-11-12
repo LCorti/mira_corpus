@@ -1,0 +1,198 @@
+--------------------------------------------------------------------------------
+Paper 1: A00-2034
+--------------------------------------------------------------------------------
+
+Query 1 (high_recall):
+  Paper Only:        How are semantic preferences used to identify verbal participation in role‑switching alternations?
+  Similarity Aware:  How does the unsupervised method identify diathesis alternations using selectional preferences?
+  Status: DIFFERENT
+
+Query 2 (balanced):
+  Paper Only:        How can WordNet‑based selectional preferences detect causative and conative diathesis alternations?
+  Similarity Aware:  Which probability distribution over WordNet captures selectional preferences for argument slots in role‑switching alternations?
+  Status: DIFFERENT
+
+Query 3 (high_precision_distinctive):
+  Paper Only:        What distributional similarity measure compares target slot preferences to identify diathesis alternations?
+  Similarity Aware:  What role does the probability distribution of selectional preferences across argument slots play in identifying a particular alternation?
+  Status: DIFFERENT
+
+
+--------------------------------------------------------------------------------
+Paper 2: I05-5011
+--------------------------------------------------------------------------------
+
+Query 1 (high_recall):
+  Paper Only:        What methods exist for automatic paraphrase discovery?
+  Similarity Aware:  How does the unsupervised method identify keyword sets linking NE pairs?
+  Status: DIFFERENT
+
+Query 2 (balanced):
+  Paper Only:        How does an unsupervised approach discover paraphrases linking named entity pairs?
+  Similarity Aware:  Which phrase links are discovered from a large corpus without external seeds?
+  Status: DIFFERENT
+
+Query 3 (high_precision_distinctive):
+  Paper Only:        What is the two‑stage keyword and NE‑pair linking method for grouping phrases?
+  Similarity Aware:  What are the accuracy rates for keyword sets and NE links across different sets?
+  Status: DIFFERENT
+
+
+--------------------------------------------------------------------------------
+Paper 3: P05-1047
+--------------------------------------------------------------------------------
+
+Query 1 (high_recall):
+  Paper Only:        What techniques are used for acquiring information extraction patterns?
+  Similarity Aware:  How does the semantic algorithm acquire IE patterns from documents?
+  Status: DIFFERENT
+
+Query 2 (balanced):
+  Paper Only:        How does an ontology‑enhanced vector space model improve information extraction pattern induction?
+  Similarity Aware:  What ontology supports the novel IE pattern induction for relevant extraction?
+  Status: DIFFERENT
+
+Query 3 (high_precision_distinctive):
+  Paper Only:        What algorithm uses ontology‑based semantic similarity within a vector space model for IE pattern induction?
+  Similarity Aware:  Which novel IE pattern induction yields useful similar results for relevant extraction?
+  Status: DIFFERENT
+
+
+--------------------------------------------------------------------------------
+Paper 4: P98-2127
+--------------------------------------------------------------------------------
+
+Query 1 (high_recall):
+  Paper Only:        How can similar words be automatically retrieved and clustered?
+  Similarity Aware:  How does the corpus influence the clustering approach?
+  Status: DIFFERENT
+
+Query 2 (balanced):
+  Paper Only:        What distributional pattern similarity measure builds a thesaurus from a parsed corpus?
+  Similarity Aware:  Which natural constructs define a construct for automatic retrieval?
+  Status: DIFFERENT
+
+Query 3 (high_precision_distinctive):
+  Paper Only:        How does the automatically constructed thesaurus compare to WordNet versus Roget Thesaurus?
+  Similarity Aware:  What construct defines natural clustering and roget retrieval significance?
+  Status: DIFFERENT
+
+
+--------------------------------------------------------------------------------
+Paper 5: P98-2177
+--------------------------------------------------------------------------------
+
+Query 1 (high_recall):
+  Paper Only:        What unsupervised statistical models address prepositional phrase attachment?
+  Similarity Aware:  How does the unsupervised model handle prepositional attachment using raw text?
+  Status: DIFFERENT
+
+Query 2 (balanced):
+  Paper Only:        How does a proximity-based heuristic improve unsupervised PP attachment for English and Spanish?
+  Similarity Aware:  Which proximity heuristic makes the prepositional attachment model portable across languages in the corpus?
+  Status: DIFFERENT
+
+Query 3 (high_precision_distinctive):
+  Paper Only:        Can raw text with POS tags and base forms train unsupervised PP attachment models without attachment annotations?
+  Similarity Aware:  What statistical models enable raw-text prepositional attachment without supervised resources?
+  Status: DIFFERENT
+
+
+--------------------------------------------------------------------------------
+Paper 6: P98-2182
+--------------------------------------------------------------------------------
+
+Query 1 (high_recall):
+  Paper Only:        How are noun‑phrase co‑occurrence statistics used for building semantic lexicons?
+  Similarity Aware:  How does the semantic algorithm select terms from a small corpus?
+  Status: DIFFERENT
+
+Query 2 (balanced):
+  Paper Only:        What algorithm extracts category entries from an online corpus using a few exemplar noun phrases?
+  Similarity Aware:  Which entries provide correct exemplars relative to the corpus?
+  Status: DIFFERENT
+
+Query 3 (high_precision_distinctive):
+  Paper Only:        Can noun‑phrase co‑occurrence statistics enhance WordNet for semi‑automatic semantic lexicon construction?
+  Similarity Aware:  What small set of terms yields correct entries without incorrect exemplars?
+  Status: DIFFERENT
+
+
+--------------------------------------------------------------------------------
+Paper 7: P99-1016
+--------------------------------------------------------------------------------
+
+Query 1 (high_recall):
+  Paper Only:        What automatic approaches construct noun hierarchies from text?
+  Similarity Aware:  Which WordNet hierarchy does the paper construct from Wall Street Journal text?
+  Status: DIFFERENT
+
+Query 2 (balanced):
+  Paper Only:        How does automatic hypernym‑labeled noun hierarchy creation emulate WordNet's hand‑built hierarchy?
+  Similarity Aware:  How does the hypernyms labeling process work on noun clusters derived from the text?
+  Status: DIFFERENT
+
+Query 3 (high_precision_distinctive):
+  Paper Only:        Which technique automatically builds a hypernym‑labeled noun hierarchy directly from textual corpora?
+  Similarity Aware:  What step builds the noun hierarchy and assigns hypernyms to related words?
+  Status: DIFFERENT
+
+
+--------------------------------------------------------------------------------
+Paper 8: W02-0908
+--------------------------------------------------------------------------------
+
+Query 1 (high_recall):
+  Paper Only:        What methods improve automatic thesaurus extraction?
+  Similarity Aware:  How does the semantic similarity influence extraction performance for thesaurus construction?
+  Status: DIFFERENT
+
+Query 2 (balanced):
+  Paper Only:        How do similarity metrics affect performance and efficiency in automatic thesaurus extraction?
+  Similarity Aware:  Which approximation technique reduces complexity while maintaining performance on a large corpus?
+  Status: DIFFERENT
+
+Query 3 (high_precision_distinctive):
+  Paper Only:        Which approximation using attribute‑based coarse‑ and fine‑grained matching reduces thesaurus extraction time?
+  Similarity Aware:  What lexical attributes and performance penalty are addressed in the modern approximation for thesaurus extraction?
+  Status: DIFFERENT
+
+
+--------------------------------------------------------------------------------
+Paper 9: W03-1011
+--------------------------------------------------------------------------------
+
+Query 1 (high_recall):
+  Paper Only:        What frameworks exist for distributional similarity?
+  Similarity Aware:  How does the distributional framework incorporate parameter settings to achieve optimal results?
+  Status: DIFFERENT
+
+Query 2 (balanced):
+  Paper Only:        How do precision‑recall parameter settings affect distributional similarity for high‑frequency nouns?
+  Similarity Aware:  Which concepts of precision and recall are emphasized in the general framework?
+  Status: DIFFERENT
+
+Query 3 (high_precision_distinctive):
+  Paper Only:        Which parameter settings outperform state‑of‑the‑art similarity measures on noun evaluation tasks?
+  Similarity Aware:  What approximate framework evaluates parameter settings for optimal precision?
+  Status: DIFFERENT
+
+
+--------------------------------------------------------------------------------
+Paper 10: W03-1812
+--------------------------------------------------------------------------------
+
+Query 1 (high_recall):
+  Paper Only:        How are multiword expressions decomposed using latent semantic analysis?
+  Similarity Aware:  How does the study utilize WordNet to assess multiword expression decomposability?
+  Status: DIFFERENT
+
+Query 2 (balanced):
+  Paper Only:        What is the correlation between LSA similarity scores and WordNet hyponymy for English noun compounds?
+  Similarity Aware:  Which latent similarities and hyponymy analysis are derived from the corpus?
+  Status: DIFFERENT
+
+Query 3 (high_precision_distinctive):
+  Paper Only:        How does mean hyponymy over similarity‑ranked partitions indicate semantic relational content in WordNet for MWE decomposability?
+  Similarity Aware:  What empirical model predicts multiword expression decomposability using latent semantic analysis?
+  Status: DIFFERENT

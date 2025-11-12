@@ -1,0 +1,10 @@
+{
+  "total_papers": 10,
+  "processed_papers": 10,
+  "skipped_papers": 0,
+  "skipped_details": [],
+  "average_neighbors": 9.0,
+  "average_shared_facets": 7.7,
+  "average_unique_facets": 9.5,
+  "average_disallowed_terms": 6.2
+}
