@@ -50,7 +50,7 @@ if len(common_paper_ids) == 0:
 # Load sentence transformer model
 model_name = 'Alibaba-NLP/gte-Qwen2-1.5B-instruct'
 print(f"\nLoading sentence transformer model ({model_name})")
-model = SentenceTransformer(model_name, trust_remote_code=True)
+model = SentenceTransformer(model_name)
 
 # Prepare all texts for encoding
 print("Preparing texts for encoding...")
