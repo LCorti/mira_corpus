@@ -17,12 +17,13 @@ from pathlib import Path
 from typing import List, Dict, Any
 
 
-def parse_jsonl_file(filepath: str) -> List[Dict[str, Any]]:
+def parse_jsonl_file(filepath: str, relevance_indices: List[List[int]] | None = None) -> List[Dict[str, Any]]:
     """
     Parse a JSONL file containing GPT queries.
     
     Args:
         filepath: Path to the JSONL file
+        relevance_indices: Optional list of lists containing relevance indices for each query. Must have the same length as the total number of queries.
         
     Returns:
         List of dictionaries containing parsed data
@@ -49,7 +50,7 @@ def parse_jsonl_file(filepath: str) -> List[Dict[str, Any]]:
                         'paper_id': paper_id,
                         'query_type': query['breadth'],
                         'query': query['text'],
-                        'relevance_idx': []  # Empty for now
+                        'relevance_idx': []  # Will be filled later if relevance_indices provided
                     })
                     
             except json.JSONDecodeError as e:
@@ -58,17 +59,29 @@ def parse_jsonl_file(filepath: str) -> List[Dict[str, Any]]:
             except KeyError as e:
                 print(f"Warning: Missing key in line {line_num}: {e}")
                 continue
+    
+    # Fill in relevance indices if provided
+    if relevance_indices is not None:
+        if len(relevance_indices) != len(records):
+            raise ValueError(
+                f"Length mismatch: relevance_indices has {len(relevance_indices)} elements "
+                f"but there are {len(records)} query records"
+            )
+        for i, idx_list in enumerate(relevance_indices):
+            records[i]['relevance_idx'] = idx_list
                 
     return records
 
 
-def convert_to_parquet(input_file: str, output_file: str | None = None):
+def convert_to_parquet(input_file: str, output_file: str | None = None, relevance_indices: List[List[int]] | None = None):
     """
     Convert JSONL file to Parquet format.
     
     Args:
         input_file: Path to input JSONL file
         output_file: Path to output Parquet file (optional)
+        relevance_indices: Optional list of lists containing relevance indices for each query.
+                          Must have the same length as the total number of queries.
     """
     # Set default output filename if not provided
     if output_file is None:
@@ -78,7 +91,7 @@ def convert_to_parquet(input_file: str, output_file: str | None = None):
     print(f"Reading from: {input_file}")
     
     # Parse the JSONL file
-    records = parse_jsonl_file(input_file)
+    records = parse_jsonl_file(input_file, relevance_indices)
     
     if not records:
         print("Error: No records found in the input file")
@@ -131,8 +144,43 @@ def main():
         print(f"Error: Input file not found: {args.input_file}")
         return
     
+    # relevance_indices = None  # Set to None to use empty lists for all queries
+
+    relevance_indices = [
+        [0, 1, 4, 6],   # 1
+        [0, 6],         # 2
+        [0, 2, 4, 6],   # 3
+        [0, 1, 9],      # 4
+        [1],            # 5
+        [1],            # 6
+        [1, 2, 4],      # 7
+        [2],            # 8
+        [0, 2, 3, 4],   # 9
+        [3],            # 10
+        [0, 3],         # 11
+        [3],            # 12
+        [0, 4],         # 13
+        [0, 3, 4],      # 14
+        [0, 4],         # 15
+        [5],            # 16
+        [5],            # 17
+        [5],            # 18
+        [0, 4, 6],      # 19
+        [0, 1, 6],      # 20
+        [6],            # 21
+        [7],            # 22
+        [7],            # 23
+        [7],            # 24
+        [4, 5, 8, 9],   # 25
+        [5, 8],         # 26
+        [8],            # 27
+        [9],            # 28
+        [9],            # 29
+        [9]             # 30
+    ]
+    
     # Convert to Parquet
-    convert_to_parquet(args.input_file, args.output)
+    convert_to_parquet(args.input_file, args.output, relevance_indices)
 
 
 if __name__ == '__main__':

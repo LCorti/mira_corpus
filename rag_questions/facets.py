@@ -69,25 +69,29 @@ def canonicalize_phrase(s: str):
 def extract_terms(text: str) -> Tuple[Counter, set]:
     """Return (term_counts, term_presence_set) with canonical forms."""
     doc = nlp(text)
+    
     # unigram terms
     uni = [normalize_token(t) for t in doc]
     uni = [u for u in uni if u]
+    
     # multiword candidates
     phrases = set(noun_phrases(doc)) | set(frequent_ngrams(doc, 2, 4))
+    
     # fold acronyms (ABC -> expanded) if pattern X (ABC) appears
     acronym_map = {}
-    for m in re.finditer(r"([A-Za-z][A-Za-z \-]{2,})\s*\(\s*([A-Z]{2,})\s*\)", text):
+    for m in re.finditer(r"([A-Za-z][A-Za-z \-]{2,})\s*\(\s*([A-Z]{2,})\s*\)", text): # e.g., Latent Semantic Analysis (LSA)
         expanded = canonicalize_phrase(m.group(1))
         acronym = m.group(2)
         acronym_map[acronym] = expanded
+    
     # canonicalize
     cand = [canonicalize_phrase(w) for w in uni] + [canonicalize_phrase(p) for p in phrases]
+    
     # apply acronym expansion mapping
     expanded = []
     for c in cand:
-        if c in acronym_map:
-            expanded.append(acronym_map[c])
-        expanded.append(c)
+        if c in acronym_map: expanded.append(acronym_map[c])
+        else: expanded.append(c)
     counts = Counter(expanded)
     presence = {t for t in counts if t and not t.isspace()}
     return counts, presence
@@ -105,7 +109,7 @@ GLOBAL_SHARED = [
 # Global disallowed terms (frequent, low-information boilerplate)
 GLOBAL_DISALLOWED = ["semantic", "similarity", "present", "approach"]
 
-# Noise/boilerplate filter (expanded)
+# Noise/boilerplate filter
 NOISE = {
     "base", "present", "approach", "method", "model",
     "paper", "work", "result", "experiment", "system",

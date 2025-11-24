@@ -59,7 +59,7 @@ Output format:
 }}
 
 Guidelines:
-- **Q1 (high recall)**: Broad, field-defining. Use 1–2 general domain terms from the paper's title or abstract.
+- **Q1 (high recall)**: Broad, field-defining. Use 1-2 general domain terms from the paper's title or abstract.
 - **Q2 (balanced)**: Moderate specificity. Combine the main task or method with one contextual detail (dataset, language, or evaluation).
 - **Q3 (high precision / distinctive)**: Include distinctive technical or methodological phrases that uniquely identify this paper.
 

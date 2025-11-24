@@ -1,0 +1,59 @@
+Paper 0: P98-2127 - Automatic Retrieval and Clustering of Similar Words
+Top 3 most similar papers:
+  1. Paper 6 (W02-0908): 0.8963
+  2. Paper 4 (P99-1016): 0.8736
+  3. Paper 2 (P98-2182): 0.8699
+
+Paper 1: W03-1011 - A General Framework For Distributional Similarity
+Top 3 most similar papers:
+  1. Paper 0 (P98-2127): 0.8686
+  2. Paper 6 (W02-0908): 0.8615
+  3. Paper 9 (A00-2034): 0.8561
+
+Paper 2: P98-2182 - Noun-Phrase Co-occurrence Statistics for Semi-Automatic Semantic Lexicon Construction
+Top 3 most similar papers:
+  1. Paper 5 (P98-2177): 0.8825
+  2. Paper 3 (W03-1812): 0.8747
+  3. Paper 0 (P98-2127): 0.8699
+
+Paper 3: W03-1812 - An Empirical Model Of Multiword Expression Decomposability
+Top 3 most similar papers:
+  1. Paper 2 (P98-2182): 0.8747
+  2. Paper 5 (P98-2177): 0.8656
+  3. Paper 9 (A00-2034): 0.8611
+
+Paper 4: P99-1016 - Automatic Construction Of A Hypernym-Labeled Noun Hierarchy From Text
+Top 3 most similar papers:
+  1. Paper 0 (P98-2127): 0.8736
+  2. Paper 2 (P98-2182): 0.8686
+  3. Paper 8 (I05-5011): 0.8616
+
+Paper 5: P98-2177 - Statistical Models for Unsupervised Prepositional Phrase Attachment
+Top 3 most similar papers:
+  1. Paper 2 (P98-2182): 0.8825
+  2. Paper 3 (W03-1812): 0.8656
+  3. Paper 9 (A00-2034): 0.8537
+
+Paper 6: W02-0908 - Improvements In Automatic Thesaurus Extraction
+Top 3 most similar papers:
+  1. Paper 0 (P98-2127): 0.8963
+  2. Paper 7 (P05-1047): 0.8652
+  3. Paper 9 (A00-2034): 0.8617
+
+Paper 7: P05-1047 - A Semantic Approach To IE Pattern Induction
+Top 3 most similar papers:
+  1. Paper 9 (A00-2034): 0.8698
+  2. Paper 0 (P98-2127): 0.8665
+  3. Paper 8 (I05-5011): 0.8660
+
+Paper 8: I05-5011 - Automatic Paraphrase Discovery based on Context and Keywords between NE Pairs
+Top 3 most similar papers:
+  1. Paper 7 (P05-1047): 0.8660
+  2. Paper 2 (P98-2182): 0.8628
+  3. Paper 4 (P99-1016): 0.8616
+
+Paper 9: A00-2034 - Using Semantic Preferences To Identify Verbal Participation In Role Switching Alternations
+Top 3 most similar papers:
+  1. Paper 7 (P05-1047): 0.8698
+  2. Paper 2 (P98-2182): 0.8670
+  3. Paper 6 (W02-0908): 0.8617
