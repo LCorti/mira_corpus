@@ -1,10 +1,32 @@
 import ollama
 import time
 import json
-import utils
-
+import sys
+import os
 from pathlib import Path
+
+# Add parent directory to path to import utils
+sys.path.insert(0, str(Path(__file__).parent.parent))
+import utils
 from typing import Dict, Any
+
+
+def check_ollama_auth():
+    """Check if Ollama API key is set."""
+    api_key = os.environ.get('OLLAMA_API_KEY')
+    print(f"key: {api_key}")
+    if not api_key:
+        print("\n" + "="*80)
+        print("ERROR: OLLAMA_API_KEY environment variable is not set!")
+        print("="*80)
+        print("\nTo set it in PowerShell:")
+        print("  For current session:")
+        print('    $env:OLLAMA_API_KEY = "your_api_key"')
+        print("\n  For permanent (requires terminal restart):")
+        print('    [System.Environment]::SetEnvironmentVariable(\'OLLAMA_API_KEY\', \'your_api_key\', \'User\')')
+        print("\nThen run the script again.")
+        print("="*80 + "\n")
+        sys.exit(1)
 
 
 def build_answerability_prompt(paper_text: str, question: str, paper_id: str, question_id: str) -> str:
@@ -85,7 +107,7 @@ def parse_llm_response(response_text: str) -> Dict[str, Any]:
         }
 
 
-def evaluate_pair(paper_id: str, paper_text: str, question_id: str, question: str, gen_options: Dict[str, Any]) -> Dict[str, Any]:
+def evaluate_pair(paper_id: str, paper_text: str, question_id: str, question: str, gen_options: Dict[str, Any], client: ollama.Client) -> Dict[str, Any]:
     """
     Evaluate a single paper-question pair.
     
@@ -97,8 +119,8 @@ def evaluate_pair(paper_id: str, paper_text: str, question_id: str, question: st
     
     # Try to get response from Ollama, with retry logic for rate limits
     try:
-        response = ollama.generate(
-            model="gpt-oss:120b-cloud", 
+        response = client.generate(
+            model="gpt-oss:120b", 
             prompt=prompt, 
             options=gen_options
         )
@@ -108,8 +130,8 @@ def evaluate_pair(paper_id: str, paper_text: str, question_id: str, question: st
         time.sleep(60 * sleep_mins)
         print("    Ending timeout. Trying again.")
         try:
-            response = ollama.generate(
-                model="gpt-oss:120b-cloud", 
+            response = client.generate(
+                model="gpt-oss:120b", 
                 prompt=prompt, 
                 options=gen_options
             )
@@ -129,10 +151,21 @@ def evaluate_pair(paper_id: str, paper_text: str, question_id: str, question: st
 
 
 def main():
+    # Check API key is set
+    check_ollama_auth()
+    
+    # Initialize Ollama client with API key
+    api_key = os.environ.get('OLLAMA_API_KEY')
+    client = ollama.Client(
+        host='https://ollama.com',
+        headers={'Authorization': f'Bearer {api_key}'}
+    )
+    
     # Load papers and questions
-    selected_papers_path = Path("rag_questions", "data", "selected_papers.jsonl")
-    gpt_questions_path = Path("rag_questions", "data", "gpt_questions_paper_only.jsonl")
-    output_path = Path("rag_questions", "data", "question_answerability_evaluations.jsonl")
+    script_dir = Path(__file__).parent
+    selected_papers_path = script_dir / "data" / "selected_papers.jsonl"
+    gpt_questions_path = script_dir / "data" / "gpt_questions_paper_only.jsonl"
+    output_path = script_dir / "data" / "question_answerability_evaluations_paper_only.jsonl"
     
     print("Loading data...")
     selected_papers = utils.load_jsonl(selected_papers_path)
@@ -216,7 +249,8 @@ def main():
                         paper_text=paper_text,
                         question_id=question_id,
                         question=question_text,
-                        gen_options=gen_options
+                        gen_options=gen_options,
+                        client=client
                     )
                 except Exception as e:
                     print(f"  ERROR during evaluation: {str(e)}")

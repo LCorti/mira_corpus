@@ -4,19 +4,19 @@ from pathlib import Path
 
 
 def load_jsonl(file_path: str | Path) -> list[dict]:
-    with open(file_path, "r") as fp:
+    with open(file_path, "r", encoding="utf-8") as fp:
         data = [json.loads(line) for line in fp]
     return data
 
 
 def append_to_jsonl(data: dict, file_path: str | Path) -> None:
-    with open(file_path, "a") as fp:
+    with open(file_path, "a", encoding="utf-8") as fp:
         fp.write(json.dumps(data))
         fp.write("\n")
 
 
 def save_json(data: dict, file_path: str | Path, indent: int = 2) -> None:
-    with open(file_path, "w") as fp:
+    with open(file_path, "w", encoding="utf-8") as fp:
         json.dump(data, fp, indent=indent)
 
 
