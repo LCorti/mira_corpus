@@ -1,0 +1,53 @@
+================================================================================
+RELEVANCE INDICES STATISTICS
+================================================================================
+
+Total questions: 30
+Total relevance judgments: 58
+Average relevant papers per question: 1.93
+
+Distribution of relevant papers per question:
+--------------------------------------------------------------------------------
+  1 relevant paper(s): 21 questions
+  2 relevant paper(s): 2 questions
+  3 relevant paper(s): 3 questions
+  5 relevant paper(s): 2 questions
+  6 relevant paper(s): 1 questions
+  8 relevant paper(s): 1 questions
+
+Questions without any relevant papers: 0
+
+================================================================================
+DETAILED QUESTION-BY-QUESTION BREAKDOWN
+================================================================================
+
+Question 1: 8 relevant paper(s) -> [0, 1, 2, 3, 4, 6, 8, 9]
+Question 2: 3 relevant paper(s) -> [0, 4, 6]
+Question 3: 1 relevant paper(s) -> [0]
+Question 4: 1 relevant paper(s) -> [9]
+Question 5: 1 relevant paper(s) -> [1]
+Question 6: 3 relevant paper(s) -> [0, 1, 6]
+Question 7: 5 relevant paper(s) -> [0, 1, 2, 4, 6]
+Question 8: 1 relevant paper(s) -> [2]
+Question 9: 3 relevant paper(s) -> [0, 2, 4]
+Question 10: 1 relevant paper(s) -> [3]
+Question 11: 1 relevant paper(s) -> [3]
+Question 12: 1 relevant paper(s) -> [3]
+Question 13: 2 relevant paper(s) -> [4, 6]
+Question 14: 1 relevant paper(s) -> [4]
+Question 15: 1 relevant paper(s) -> [4]
+Question 16: 1 relevant paper(s) -> [5]
+Question 17: 1 relevant paper(s) -> [5]
+Question 18: 1 relevant paper(s) -> [5]
+Question 19: 5 relevant paper(s) -> [0, 1, 2, 4, 6]
+Question 20: 2 relevant paper(s) -> [2, 6]
+Question 21: 1 relevant paper(s) -> [6]
+Question 22: 6 relevant paper(s) -> [0, 4, 5, 6, 7, 8]
+Question 23: 1 relevant paper(s) -> [7]
+Question 24: 1 relevant paper(s) -> [7]
+Question 25: 1 relevant paper(s) -> [8]
+Question 26: 1 relevant paper(s) -> [8]
+Question 27: 1 relevant paper(s) -> [8]
+Question 28: 1 relevant paper(s) -> [9]
+Question 29: 1 relevant paper(s) -> [9]
+Question 30: 1 relevant paper(s) -> [9]

@@ -39,7 +39,6 @@ def parse_jsonl_file(filepath: str, relevance_indices: List[List[int]] | None = 
             try:
                 # Parse the outer JSON
                 entry = json.loads(line)
-                paper_id = entry['paper_id']
                 
                 # Parse the inner JSON string (gpt_queries)
                 gpt_queries = json.loads(entry['gpt_queries'])
@@ -47,8 +46,6 @@ def parse_jsonl_file(filepath: str, relevance_indices: List[List[int]] | None = 
                 # Extract each query
                 for query in gpt_queries['queries']:
                     records.append({
-                        'paper_id': paper_id,
-                        'query_type': query['breadth'],
                         'query': query['text'],
                         'relevance_idx': []  # Will be filled later if relevance_indices provided
                     })
@@ -80,8 +77,7 @@ def convert_to_parquet(input_file: str, output_file: str | None = None, relevanc
     Args:
         input_file: Path to input JSONL file
         output_file: Path to output Parquet file (optional)
-        relevance_indices: Optional list of lists containing relevance indices for each query.
-                          Must have the same length as the total number of queries.
+        relevance_indices: Optional list of lists containing relevance indices for each query. Must have the same length as the total number of queries.
     """
     # Set default output filename if not provided
     if output_file is None:
@@ -105,9 +101,7 @@ def convert_to_parquet(input_file: str, output_file: str | None = None, relevanc
     # Display some statistics
     print("\nDataset statistics:")
     print(f"  Total queries: {len(df)}")
-    print(f"  Unique papers: {df['paper_id'].nunique()}")
-    print("\nQuery type distribution:")
-    print(df['query_type'].value_counts())
+    print(f"  Unique queries: {df['query'].nunique()}")
     
     # Save to Parquet
     print(f"\nSaving to: {output_file}")
@@ -147,36 +141,36 @@ def main():
     # relevance_indices = None  # Set to None to use empty lists for all queries
 
     relevance_indices = [
-        [0, 1, 4, 6],   # 1
-        [0, 6],         # 2
-        [0, 2, 4, 6],   # 3
-        [0, 1, 9],      # 4
-        [1],            # 5
-        [1],            # 6
-        [1, 2, 4],      # 7
-        [2],            # 8
-        [0, 2, 3, 4],   # 9
-        [3],            # 10
-        [0, 3],         # 11
-        [3],            # 12
-        [0, 4],         # 13
-        [0, 3, 4],      # 14
-        [0, 4],         # 15
-        [5],            # 16
-        [5],            # 17
-        [5],            # 18
-        [0, 4, 6],      # 19
-        [0, 1, 6],      # 20
-        [6],            # 21
-        [7],            # 22
-        [7],            # 23
-        [7],            # 24
-        [4, 5, 8, 9],   # 25
-        [5, 8],         # 26
-        [8],            # 27
-        [9],            # 28
-        [9],            # 29
-        [9]             # 30
+        [0,1,2,3,4,6,8,9],              # 1
+        [0,4,6],                        # 2
+        [0],                            # 3
+        [9],                            # 4
+        [1],                            # 5
+        [0,1,6],                        # 6
+        [0,1,2,4,6],                    # 7
+        [2],                            # 8
+        [0,2,4],                        # 9
+        [3],                            # 10
+        [3],                            # 11
+        [3],                            # 12
+        [4,6],                          # 13
+        [4],                            # 14
+        [4],                            # 15
+        [5],                            # 16
+        [5],                            # 17
+        [5],                            # 18
+        [0,1,2,4,6],                    # 19
+        [2,6],                          # 20
+        [6],                            # 21
+        [0,4,5,6,7,8],                  # 22
+        [7],                            # 23
+        [7],                            # 24
+        [8],                            # 25
+        [8],                            # 26
+        [8],                            # 27
+        [9],                            # 28
+        [9],                            # 29
+        [9],                            # 30
     ]
     
     # Convert to Parquet
