@@ -164,8 +164,8 @@ def main():
     # Load papers and questions
     script_dir = Path(__file__).parent
     selected_papers_path = script_dir / "data" / "selected_papers.jsonl"
-    gpt_questions_path = script_dir / "data" / "gpt_questions_paper_only.jsonl"
-    output_path = script_dir / "data" / "question_answerability_evaluations_paper_only.jsonl"
+    gpt_questions_path = script_dir / "data" / "gpt_questions_similarity_aware.jsonl"
+    output_path = script_dir / "data" / "question_answerability_evaluations_similarity_aware.jsonl"
     
     print("Loading data...")
     selected_papers = utils.load_jsonl(selected_papers_path)
