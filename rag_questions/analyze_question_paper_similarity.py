@@ -12,12 +12,12 @@ from sentence_transformers import SentenceTransformer
 
 # Load the data
 def load_jsonl(file_path):
-    with open(file_path, 'r') as f:
+    with open(file_path, 'r', encoding='utf-8') as f:
         return [json.loads(line) for line in f]
 
 # Load papers and questions
-selected_papers_path = Path("data_scisumm", "selected_papers.jsonl")
-gpt_questions_path = Path("data_scisumm", "gpt_questions_similarity_aware.jsonl")
+selected_papers_path = Path("data", "selected_papers.jsonl")
+gpt_questions_path = Path("data", "gpt_questions_similarity_aware.jsonl")
 
 print("Loading data...")
 selected_papers = load_jsonl(selected_papers_path)
@@ -114,13 +114,13 @@ plt.yticks(rotation=0, fontsize=8)
 plt.tight_layout()
 
 # Save the figure
-output_path = Path("data_scisumm", "paper_question_similarity_heatmap_similarity_aware.png")
+output_path = Path("output", "paper_question_similarity_heatmap_similarity_aware.png")
 plt.savefig(output_path, dpi=300, bbox_inches='tight')
 print(f"Heatmap saved to: {output_path}")
 
 # Save similarity values to text file
 print("\nSaving similarity values to text file...")
-txt_output_path = Path("data_scisumm", "paper_question_similarity_values_similarity_aware.txt")
+txt_output_path = Path("output", "paper_question_similarity_values_similarity_aware.txt")
 with open(txt_output_path, 'w') as f:
     f.write("Semantic Similarity: Papers vs. Generated Questions\n")
     f.write("=" * 80 + "\n\n")
