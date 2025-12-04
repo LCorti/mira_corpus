@@ -367,7 +367,7 @@ def write_report(stats: Dict, results: Dict, output_path: Path):
 
 def main():
     # Paths
-    similarity_file = Path("rag_questions", "output", "paper_question_similarity_values.txt")
+    similarity_file = Path("rag_questions", "output", "paper_question_similarity_values_similarity_aware.txt")
     answerability_file = Path("rag_questions", "data", "question_answerability_evaluations_similarity_aware.jsonl")
     output_dir = Path("rag_questions", "output")
     report_path = output_dir / "similarity_answerability_overlap_report.txt"
