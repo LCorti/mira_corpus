@@ -11,10 +11,9 @@ Goal: Determine if high similarity correlates with answerability, and ensure eac
 import json
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 from pathlib import Path
 from collections import defaultdict
-from typing import Dict, List, Tuple
+from typing import Dict, Tuple
 
 
 def parse_similarity_file(file_path: Path) -> Dict[str, Dict[str, float]]:
@@ -369,7 +368,7 @@ def write_report(stats: Dict, results: Dict, output_path: Path):
 def main():
     # Paths
     similarity_file = Path("rag_questions", "output", "paper_question_similarity_values.txt")
-    answerability_file = Path("rag_questions", "data", "question_answerability_evaluations_paper_only.jsonl")
+    answerability_file = Path("rag_questions", "data", "question_answerability_evaluations_similarity_aware.jsonl")
     output_dir = Path("rag_questions", "output")
     report_path = output_dir / "similarity_answerability_overlap_report.txt"
     
