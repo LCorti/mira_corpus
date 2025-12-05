@@ -213,7 +213,7 @@ def create_visualizations(results: Dict, stats: Dict, output_dir: Path):
     ax.grid(alpha=0.3)
     
     plt.tight_layout()
-    plt.savefig(output_dir / 'similarity_distribution_by_answerability.png', dpi=300, bbox_inches='tight')
+    plt.savefig(output_dir / 'similarity_distribution_by_answerability_paper_only.png', dpi=300, bbox_inches='tight')
     plt.close()
     
     # 2. Box plot: Similarity by answerability
@@ -242,7 +242,7 @@ def create_visualizations(results: Dict, stats: Dict, output_dir: Path):
     ax.grid(alpha=0.3, axis='y')
     
     plt.tight_layout()
-    plt.savefig(output_dir / 'similarity_boxplot_by_answerability.png', dpi=300, bbox_inches='tight')
+    plt.savefig(output_dir / 'similarity_boxplot_by_answerability_paper_only.png', dpi=300, bbox_inches='tight')
     plt.close()
     
     # 3. Per-question analysis: Does the highest similarity paper answer the question?
@@ -267,7 +267,7 @@ def create_visualizations(results: Dict, stats: Dict, output_dir: Path):
     ax.grid(alpha=0.3, axis='y')
     
     plt.tight_layout()
-    plt.savefig(output_dir / 'highest_similarity_answerability.png', dpi=300, bbox_inches='tight')
+    plt.savefig(output_dir / 'highest_similarity_answerability_paper_only.png', dpi=300, bbox_inches='tight')
     plt.close()
     
     print(f"Visualizations saved to {output_dir}/")
@@ -369,7 +369,7 @@ def main():
     # Paths
     similarity_file = Path("rag_questions", "output", "paper_question_similarity_values_similarity_aware.txt")
     answerability_file = Path("rag_questions", "data", "question_answerability_evaluations_similarity_aware.jsonl")
-    output_dir = Path("rag_questions", "output")
+    output_dir = Path("rag_questions", "output", "similarity_aware")
     report_path = output_dir / "similarity_answerability_overlap_report.txt"
     
     print("Loading data...")

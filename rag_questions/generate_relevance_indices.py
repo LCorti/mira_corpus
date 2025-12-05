@@ -210,9 +210,9 @@ def write_statistics(relevance_indices: List[List[int]], output_path: Path):
 def main():
     # Paths
     papers_path = Path("rag_questions", "data", "selected_papers.jsonl")
-    answerability_path = Path("rag_questions", "data", "question_answerability_evaluations_paper_only.jsonl")
+    answerability_path = Path("rag_questions", "data", "question_answerability_evaluations_similarity_aware.jsonl")
     output_code_path = Path("rag_questions", "data", "relevance_indices.py")
-    output_stats_path = Path("rag_questions", "output", "relevance_indices_statistics.txt")
+    output_stats_path = Path("rag_questions", "output", "similarity_aware", "relevance_indices_statistics.txt")
     
     print("Loading data...")
     papers = utils.load_jsonl(papers_path)

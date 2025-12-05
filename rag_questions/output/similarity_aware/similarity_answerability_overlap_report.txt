@@ -1,0 +1,286 @@
+================================================================================
+SIMILARITY-ANSWERABILITY OVERLAP ANALYSIS
+================================================================================
+
+OVERALL STATISTICS
+--------------------------------------------------------------------------------
+Total paper-question pairs: 300
+Answerable pairs: 75 (25.0%)
+Not answerable pairs: 225 (75.0%)
+Error/unknown pairs: 0 (0.0%)
+
+SIMILARITY SCORE STATISTICS
+--------------------------------------------------------------------------------
+
+Answerable pairs:
+  Mean similarity: 0.4736
+  Std deviation: 0.0629
+  Range: 0.3017 - 0.6037
+
+Not answerable pairs:
+  Mean similarity: 0.4579
+  Std deviation: 0.0489
+  Range: 0.3166 - 0.5812
+
+Difference in means: 0.0157
+  (positive = answerable pairs have higher similarity)
+
+PER-QUESTION COVERAGE
+--------------------------------------------------------------------------------
+Questions with at least one answerable paper: 29
+Questions without any answerable paper: 1
+
+Document retrieval task coverage: 96.7%
+  (i.e., 96.7% of questions have at least one paper that can answer them)
+
+================================================================================
+DETAILED PER-QUESTION ANALYSIS
+================================================================================
+
+Question: A00-2034_Q1
+  Total papers evaluated: 10
+  Answerable papers: 1
+  Has answerable paper: YES
+  Best overall similarity: 0.4811 (paper: A00-2034)
+  Best answerable similarity: 0.4811
+  >>> Highest similarity paper IS answerable <<<
+
+Question: A00-2034_Q2
+  Total papers evaluated: 10
+  Answerable papers: 1
+  Has answerable paper: YES
+  Best overall similarity: 0.5846 (paper: A00-2034)
+  Best answerable similarity: 0.5846
+  >>> Highest similarity paper IS answerable <<<
+
+Question: A00-2034_Q3
+  Total papers evaluated: 10
+  Answerable papers: 1
+  Has answerable paper: YES
+  Best overall similarity: 0.5217 (paper: A00-2034)
+  Best answerable similarity: 0.5217
+  >>> Highest similarity paper IS answerable <<<
+
+Question: I05-5011_Q1
+  Total papers evaluated: 10
+  Answerable papers: 2
+  Has answerable paper: YES
+  Best overall similarity: 0.4912 (paper: A00-2034)
+  Best answerable similarity: 0.4860
+  >>> Highest similarity paper is NOT answerable <<<
+
+Question: I05-5011_Q2
+  Total papers evaluated: 10
+  Answerable papers: 3
+  Has answerable paper: YES
+  Best overall similarity: 0.5129 (paper: I05-5011)
+  Best answerable similarity: 0.5129
+  >>> Highest similarity paper IS answerable <<<
+
+Question: I05-5011_Q3
+  Total papers evaluated: 10
+  Answerable papers: 1
+  Has answerable paper: YES
+  Best overall similarity: 0.5134 (paper: W03-1011)
+  Best answerable similarity: 0.4758
+  >>> Highest similarity paper is NOT answerable <<<
+
+Question: P05-1047_Q1
+  Total papers evaluated: 10
+  Answerable papers: 4
+  Has answerable paper: YES
+  Best overall similarity: 0.5450 (paper: P05-1047)
+  Best answerable similarity: 0.5450
+  >>> Highest similarity paper IS answerable <<<
+
+Question: P05-1047_Q2
+  Total papers evaluated: 10
+  Answerable papers: 1
+  Has answerable paper: YES
+  Best overall similarity: 0.5828 (paper: P05-1047)
+  Best answerable similarity: 0.5828
+  >>> Highest similarity paper IS answerable <<<
+
+Question: P05-1047_Q3
+  Total papers evaluated: 10
+  Answerable papers: 3
+  Has answerable paper: YES
+  Best overall similarity: 0.5523 (paper: P05-1047)
+  Best answerable similarity: 0.5523
+  >>> Highest similarity paper IS answerable <<<
+
+Question: P98-2127_Q1
+  Total papers evaluated: 10
+  Answerable papers: 6
+  Has answerable paper: YES
+  Best overall similarity: 0.5189 (paper: A00-2034)
+  Best answerable similarity: 0.5189
+  >>> Highest similarity paper IS answerable <<<
+
+Question: P98-2127_Q2
+  Total papers evaluated: 10
+  Answerable papers: 5
+  Has answerable paper: YES
+  Best overall similarity: 0.4925 (paper: P99-1016)
+  Best answerable similarity: 0.4925
+  >>> Highest similarity paper IS answerable <<<
+
+Question: P98-2127_Q3
+  Total papers evaluated: 10
+  Answerable papers: 1
+  Has answerable paper: YES
+  Best overall similarity: 0.4537 (paper: P99-1016)
+  Best answerable similarity: 0.4405
+  >>> Highest similarity paper is NOT answerable <<<
+
+Question: P98-2177_Q1
+  Total papers evaluated: 10
+  Answerable papers: 2
+  Has answerable paper: YES
+  Best overall similarity: 0.4796 (paper: P98-2177)
+  Best answerable similarity: 0.4796
+  >>> Highest similarity paper IS answerable <<<
+
+Question: P98-2177_Q2
+  Total papers evaluated: 10
+  Answerable papers: 1
+  Has answerable paper: YES
+  Best overall similarity: 0.5336 (paper: W03-1011)
+  Best answerable similarity: 0.5305
+  >>> Highest similarity paper is NOT answerable <<<
+
+Question: P98-2177_Q3
+  Total papers evaluated: 10
+  Answerable papers: 1
+  Has answerable paper: YES
+  Best overall similarity: 0.5478 (paper: P98-2177)
+  Best answerable similarity: 0.5478
+  >>> Highest similarity paper IS answerable <<<
+
+Question: P98-2182_Q1
+  Total papers evaluated: 10
+  Answerable papers: 7
+  Has answerable paper: YES
+  Best overall similarity: 0.5204 (paper: A00-2034)
+  Best answerable similarity: 0.5204
+  >>> Highest similarity paper IS answerable <<<
+
+Question: P98-2182_Q2
+  Total papers evaluated: 10
+  Answerable papers: 2
+  Has answerable paper: YES
+  Best overall similarity: 0.5203 (paper: W03-1011)
+  Best answerable similarity: 0.4798
+  >>> Highest similarity paper is NOT answerable <<<
+
+Question: P98-2182_Q3
+  Total papers evaluated: 10
+  Answerable papers: 2
+  Has answerable paper: YES
+  Best overall similarity: 0.4869 (paper: W03-1011)
+  Best answerable similarity: 0.4399
+  >>> Highest similarity paper is NOT answerable <<<
+
+Question: P99-1016_Q1
+  Total papers evaluated: 10
+  Answerable papers: 0
+  Has answerable paper: NO
+  Best overall similarity: 0.5812 (paper: P99-1016)
+  Best answerable similarity: None (no answerable papers)
+
+Question: P99-1016_Q2
+  Total papers evaluated: 10
+  Answerable papers: 2
+  Has answerable paper: YES
+  Best overall similarity: 0.5531 (paper: P99-1016)
+  Best answerable similarity: 0.5531
+  >>> Highest similarity paper IS answerable <<<
+
+Question: P99-1016_Q3
+  Total papers evaluated: 10
+  Answerable papers: 2
+  Has answerable paper: YES
+  Best overall similarity: 0.5263 (paper: P99-1016)
+  Best answerable similarity: 0.5263
+  >>> Highest similarity paper IS answerable <<<
+
+Question: W02-0908_Q1
+  Total papers evaluated: 10
+  Answerable papers: 2
+  Has answerable paper: YES
+  Best overall similarity: 0.5738 (paper: W02-0908)
+  Best answerable similarity: 0.5738
+  >>> Highest similarity paper IS answerable <<<
+
+Question: W02-0908_Q2
+  Total papers evaluated: 10
+  Answerable papers: 7
+  Has answerable paper: YES
+  Best overall similarity: 0.4900 (paper: W03-1011)
+  Best answerable similarity: 0.4739
+  >>> Highest similarity paper is NOT answerable <<<
+
+Question: W02-0908_Q3
+  Total papers evaluated: 10
+  Answerable papers: 1
+  Has answerable paper: YES
+  Best overall similarity: 0.6037 (paper: W02-0908)
+  Best answerable similarity: 0.6037
+  >>> Highest similarity paper IS answerable <<<
+
+Question: W03-1011_Q1
+  Total papers evaluated: 10
+  Answerable papers: 7
+  Has answerable paper: YES
+  Best overall similarity: 0.3888 (paper: W03-1011)
+  Best answerable similarity: 0.3888
+  >>> Highest similarity paper IS answerable <<<
+
+Question: W03-1011_Q2
+  Total papers evaluated: 10
+  Answerable papers: 3
+  Has answerable paper: YES
+  Best overall similarity: 0.5286 (paper: W03-1011)
+  Best answerable similarity: 0.5286
+  >>> Highest similarity paper IS answerable <<<
+
+Question: W03-1011_Q3
+  Total papers evaluated: 10
+  Answerable papers: 2
+  Has answerable paper: YES
+  Best overall similarity: 0.4880 (paper: W03-1011)
+  Best answerable similarity: 0.4880
+  >>> Highest similarity paper IS answerable <<<
+
+Question: W03-1812_Q1
+  Total papers evaluated: 10
+  Answerable papers: 1
+  Has answerable paper: YES
+  Best overall similarity: 0.4573 (paper: W03-1812)
+  Best answerable similarity: 0.4573
+  >>> Highest similarity paper IS answerable <<<
+
+Question: W03-1812_Q2
+  Total papers evaluated: 10
+  Answerable papers: 3
+  Has answerable paper: YES
+  Best overall similarity: 0.5623 (paper: P99-1016)
+  Best answerable similarity: 0.5623
+  >>> Highest similarity paper IS answerable <<<
+
+Question: W03-1812_Q3
+  Total papers evaluated: 10
+  Answerable papers: 1
+  Has answerable paper: YES
+  Best overall similarity: 0.5534 (paper: W03-1812)
+  Best answerable similarity: 0.5534
+  >>> Highest similarity paper IS answerable <<<
+
+================================================================================
+QUESTIONS WITHOUT ANSWERABLE PAPERS
+================================================================================
+
+Question: P99-1016_Q1
+  Best similarity: 0.5812 (paper: P99-1016)
+  Action needed: This question needs at least one answerable paper for document retrieval
+

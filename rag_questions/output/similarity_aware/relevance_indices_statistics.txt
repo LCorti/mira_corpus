@@ -1,0 +1,58 @@
+================================================================================
+RELEVANCE INDICES STATISTICS
+================================================================================
+
+Total questions: 30
+Total relevance judgments: 75
+Average relevant papers per question: 2.50
+
+Distribution of relevant papers per question:
+--------------------------------------------------------------------------------
+  0 relevant paper(s): 1 questions
+  1 relevant paper(s): 11 questions
+  2 relevant paper(s): 8 questions
+  3 relevant paper(s): 4 questions
+  4 relevant paper(s): 1 questions
+  5 relevant paper(s): 1 questions
+  6 relevant paper(s): 1 questions
+  7 relevant paper(s): 3 questions
+
+Questions without any relevant papers: 1
+
+WARNING: Some questions have no relevant papers!
+  Question 13 has no relevant papers
+
+================================================================================
+DETAILED QUESTION-BY-QUESTION BREAKDOWN
+================================================================================
+
+Question 1: 6 relevant paper(s) -> [0, 4, 6, 7, 8, 9]
+Question 2: 5 relevant paper(s) -> [1, 2, 4, 6, 7]
+Question 3: 1 relevant paper(s) -> [0]
+Question 4: 7 relevant paper(s) -> [0, 1, 2, 4, 6, 7, 9]
+Question 5: 3 relevant paper(s) -> [1, 6, 7]
+Question 6: 2 relevant paper(s) -> [1, 6]
+Question 7: 7 relevant paper(s) -> [1, 2, 3, 4, 6, 7, 9]
+Question 8: 2 relevant paper(s) -> [2, 8]
+Question 9: 2 relevant paper(s) -> [2, 5]
+Question 10: 1 relevant paper(s) -> [3]
+Question 11: 3 relevant paper(s) -> [3, 4, 9]
+Question 12: 1 relevant paper(s) -> [3]
+Question 13: 0 relevant paper(s) -> []
+Question 14: 2 relevant paper(s) -> [4, 9]
+Question 15: 2 relevant paper(s) -> [4, 9]
+Question 16: 2 relevant paper(s) -> [5, 6]
+Question 17: 1 relevant paper(s) -> [5]
+Question 18: 1 relevant paper(s) -> [5]
+Question 19: 2 relevant paper(s) -> [0, 6]
+Question 20: 7 relevant paper(s) -> [3, 4, 5, 6, 7, 8, 9]
+Question 21: 1 relevant paper(s) -> [6]
+Question 22: 4 relevant paper(s) -> [4, 6, 7, 8]
+Question 23: 1 relevant paper(s) -> [7]
+Question 24: 3 relevant paper(s) -> [2, 7, 8]
+Question 25: 2 relevant paper(s) -> [7, 8]
+Question 26: 3 relevant paper(s) -> [4, 5, 8]
+Question 27: 1 relevant paper(s) -> [8]
+Question 28: 1 relevant paper(s) -> [9]
+Question 29: 1 relevant paper(s) -> [9]
+Question 30: 1 relevant paper(s) -> [9]
