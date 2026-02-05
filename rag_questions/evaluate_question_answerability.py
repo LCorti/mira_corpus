@@ -3,7 +3,9 @@ import time
 import json
 import sys
 import os
+import argparse
 from pathlib import Path
+from tqdm import tqdm
 
 # Add parent directory to path to import utils
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -15,6 +17,7 @@ def check_ollama_auth():
     """Check if Ollama API key is set."""
     api_key = os.environ.get('OLLAMA_API_KEY')
     print(f"key: {api_key}")
+
     if not api_key:
         print("\n" + "="*80)
         print("ERROR: OLLAMA_API_KEY environment variable is not set!")
@@ -113,8 +116,6 @@ def evaluate_pair(paper_id: str, paper_text: str, question_id: str, question: st
     
     Returns a dictionary with the evaluation results.
     """
-    print(f"  Evaluating {paper_id} vs {question_id}...")
-    
     prompt = build_answerability_prompt(paper_text, question, paper_id, question_id)
     
     # Try to get response from Ollama, with retry logic for rate limits
@@ -126,9 +127,9 @@ def evaluate_pair(paper_id: str, paper_text: str, question_id: str, question: st
         )
     except Exception as e:
         sleep_mins = 30
-        print(f"    Hit Ollama API limits. Sleeping for {sleep_mins} mins. Error: {str(e)}")
+        tqdm.write(f"    Hit Ollama API limits. Sleeping for {sleep_mins} mins. Error: {str(e)}")
         time.sleep(60 * sleep_mins)
-        print("    Ending timeout. Trying again.")
+        tqdm.write("    Ending timeout. Trying again.")
         try:
             response = client.generate(
                 model="gpt-oss:120b", 
@@ -136,7 +137,7 @@ def evaluate_pair(paper_id: str, paper_text: str, question_id: str, question: st
                 options=gen_options
             )
         except Exception as e2:
-            print(f"    Second attempt failed: {str(e2)}")
+            tqdm.write(f"    Second attempt failed: {str(e2)}")
             raise e2
     
     # Parse the response
@@ -151,6 +152,20 @@ def evaluate_pair(paper_id: str, paper_text: str, question_id: str, question: st
 
 
 def main():
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description='Evaluate question answerability across papers')
+    parser.add_argument('--reverse', action='store_true', 
+                        help='Process papers in reverse order (for parallel processing on multiple machines)')
+    parser.add_argument('--start-idx', type=int, default=None,
+                        help='Start processing from this paper index (0-based)')
+    parser.add_argument('--end-idx', type=int, default=None,
+                        help='Stop processing at this paper index (exclusive)')
+    parser.add_argument('--limit', type=int, default=None,
+                        help='Hard stop: only process this many papers from the list (useful for splitting work across machines)')
+    parser.add_argument('--output-suffix', type=str, default='',
+                        help='Suffix to add to output filename (e.g., "_machine2")')
+    args = parser.parse_args()
+    
     # Check API key is set
     check_ollama_auth()
     
@@ -163,9 +178,13 @@ def main():
     
     # Load papers and questions
     script_dir = Path(__file__).parent
-    selected_papers_path = script_dir / "data" / "selected_papers.jsonl"
+    # selected_papers_path = script_dir / "data" / "selected_papers.jsonl"
+    selected_papers_path = "data_scisumm/cl_scisumm.jsonl"
     gpt_questions_path = script_dir / "data" / "gpt_questions_similarity_aware.jsonl"
-    output_path = script_dir / "data" / "question_answerability_evaluations_similarity_aware.jsonl"
+    
+    # Add suffix to output filename if specified
+    output_filename = f"question_answerability_evaluations_similarity_aware_full{args.output_suffix}.jsonl"
+    output_path = script_dir / "data" / output_filename
     
     print("Loading data...")
     selected_papers = utils.load_jsonl(selected_papers_path)
@@ -189,6 +208,7 @@ def main():
         except Exception as e:
             print(f"Warning: Could not parse queries for {paper_id}: {e}")
             continue
+    print(f"Mapped questions to {len(paper_questions)} papers")
     
     # Load already processed pairs if they exist
     processed_pairs = set()
@@ -201,14 +221,34 @@ def main():
     # Generation options for Ollama
     gen_options = {"num_ctx": 130000}
     
-    # Get all paper IDs that have both text and questions
-    common_paper_ids = sorted(set(paper_texts.keys()) & set(paper_questions.keys()))
-    print(f"\nFound {len(common_paper_ids)} papers with both text and questions")
+    # Get all paper IDs (for evaluation) and all papers with questions
+    all_paper_ids = sorted(paper_texts.keys())
+    papers_with_questions = sorted(paper_questions.keys())
+    
+    # Apply reverse order if requested
+    if args.reverse:
+        all_paper_ids = list(reversed(all_paper_ids))
+        print("Processing papers in REVERSE order")
+    
+    # Apply index range if specified
+    if args.start_idx is not None or args.end_idx is not None:
+        start = args.start_idx if args.start_idx is not None else 0
+        end = args.end_idx if args.end_idx is not None else len(all_paper_ids)
+        all_paper_ids = all_paper_ids[start:end]
+        print(f"Processing papers from index {start} to {end} (total: {len(all_paper_ids)} papers)")
+    
+    # Apply limit if specified (hard stop after K papers)
+    if args.limit is not None:
+        all_paper_ids = all_paper_ids[:args.limit]
+        print(f"Hard limit applied: will process only {len(all_paper_ids)} papers")
+    
+    print(f"\nFound {len(all_paper_ids)} papers with text to process")
+    print(f"Found {len(papers_with_questions)} papers with questions")
     
     # Build full matrix of evaluations to do
     total_pairs = 0
-    for paper_id in common_paper_ids:
-        for question_paper_id in common_paper_ids:
+    for paper_id in all_paper_ids:
+        for question_paper_id in papers_with_questions:
             total_pairs += len(paper_questions[question_paper_id])
     
     print(f"Total paper-question pairs to evaluate: {total_pairs}")
@@ -219,53 +259,54 @@ def main():
         return
     
     # Process all paper-question pairs (full matrix)
-    processed_count = 0
-    for paper_id in common_paper_ids:
-        paper_text = paper_texts[paper_id]
-        
-        # Truncate very long papers to avoid memory issues
-        if len(paper_text) > 32000:
-            print(f"Truncating paper {paper_id} from {len(paper_text)} to 32000 characters")
-            paper_text = paper_text[:32000]
-        
-        # For each paper, evaluate against ALL questions from ALL papers
-        for question_paper_id in common_paper_ids:
-            questions = paper_questions[question_paper_id]
+    remaining_pairs = total_pairs - len(processed_pairs)
+    
+    with tqdm(total=remaining_pairs, desc="Evaluating pairs", unit="pair") as pbar:
+        for paper_id in all_paper_ids:
+            paper_text = paper_texts[paper_id]
             
-            for question_id, question_text in questions:
-                # Skip if already processed
-                if (paper_id, question_id) in processed_pairs:
-                    continue
+            # Truncate very long papers to avoid memory issues
+            if len(paper_text) > 32000:
+                tqdm.write(f"Truncating paper {paper_id} from {len(paper_text)} to 32000 characters")
+                paper_text = paper_text[:32000]
+            
+            # For each paper, evaluate against ALL questions from ALL papers
+            for question_paper_id in papers_with_questions:
+                questions = paper_questions[question_paper_id]
                 
-                processed_count += 1
-                print(f"\n[{processed_count}/{total_pairs - len(processed_pairs)}] Processing pair:")
-                print(f"  Paper: {paper_id}")
-                print(f"  Question: {question_id}")
-                
-                try:
-                    # Evaluate this pair
-                    result = evaluate_pair(
-                        paper_id=paper_id,
-                        paper_text=paper_text,
-                        question_id=question_id,
-                        question=question_text,
-                        gen_options=gen_options,
-                        client=client
-                    )
-                except Exception as e:
-                    print(f"  ERROR during evaluation: {str(e)}")
-                    raise e
-                
-                # Save result immediately
-                utils.append_to_jsonl(result, output_path)
-                processed_pairs.add((paper_id, question_id))
-                
-                # Print summary
-                if "error" not in result["llm_response"]:
-                    answerable = result["llm_response"].get("answerable", "unknown")
-                    print(f"  Result: {answerable}")
-                else:
-                    print(f"  Result: ERROR - {result['llm_response']['error']}")
+                for question_id, question_text in questions:
+                    # Skip if already processed
+                    if (paper_id, question_id) in processed_pairs:
+                        continue
+                    
+                    pbar.set_postfix_str(f"Paper: {paper_id}, Q: {question_id}")
+                    
+                    try:
+                        # Evaluate this pair
+                        result = evaluate_pair(
+                            paper_id=paper_id,
+                            paper_text=paper_text,
+                            question_id=question_id,
+                            question=question_text,
+                            gen_options=gen_options,
+                            client=client
+                        )
+                    except Exception as e:
+                        tqdm.write(f"  ERROR during evaluation: {str(e)}")
+                        raise e
+                    
+                    # Save result immediately
+                    utils.append_to_jsonl(result, output_path)
+                    processed_pairs.add((paper_id, question_id))
+                    
+                    # Print summary
+                    if "error" not in result["llm_response"]:
+                        answerable = result["llm_response"].get("answerable", "unknown")
+                        tqdm.write(f"  {paper_id} vs {question_id}: {answerable}")
+                    else:
+                        tqdm.write(f"  {paper_id} vs {question_id}: ERROR - {result['llm_response']['error']}")
+                    
+                    pbar.update(1)
     
     print(f"\n{'='*80}")
     print(f"Evaluation complete!")

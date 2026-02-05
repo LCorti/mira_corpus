@@ -91,11 +91,10 @@ def process_file(input_file, output_file):
     print(f"  Errors: {error_count}")
 
 if __name__ == '__main__':
-    input_file = 'data_scisumm/selected_papers.jsonl'
-    output_file = 'data_scisumm/selected_papers.jsonl'
+    input_file = 'data_scisumm/corpus.jsonl'
     
     # Process in place by using a temporary file
-    temp_file = 'data_scisumm/selected_papers_temp.jsonl'
+    temp_file = 'data_scisumm/corpus_temp.jsonl'
     
     process_file(input_file, temp_file)
     

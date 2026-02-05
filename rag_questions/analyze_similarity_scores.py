@@ -73,7 +73,7 @@ def print_results(bin_counts):
 
 def main():
     # Path to the similarity file
-    filepath = r"D:\Repositories\cl_scientific_papers\sem_similarity\Qwen3-Embedding-0.6B\all\similarity_papers.jsonl"
+    filepath = r"sem_similarity/Qwen3-Embedding-0.6B/all_new/similarity_papers.jsonl"
     
     print("Analyzing similarity scores...")
     print(f"File: {filepath}\n")

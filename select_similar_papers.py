@@ -283,15 +283,15 @@ def main():
             break
     
     # Save the selected papers with relevance scores
-    if cluster and len(cluster) >= 10:
-        save_selected_papers_with_relevance(
-            cluster[:10],  # Take first 10 papers
-            similarity_matrix,
-            paper_data,
-            output_filepath
-        )
-    else:
-        print("\nWarning: Could not find 10 highly connected papers!")
+    # if cluster and len(cluster) >= 10:
+    #     save_selected_papers_with_relevance(
+    #         cluster[:10],  # Take first 10 papers
+    #         similarity_matrix,
+    #         paper_data,
+    #         output_filepath
+    #     )
+    # else:
+    #     print("\nWarning: Could not find 10 highly connected papers!")
 
 if __name__ == "__main__":
     main()

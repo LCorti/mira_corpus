@@ -4,10 +4,8 @@ Convert GPT-generated queries from JSONL format to Parquet dataset.
 
 This script reads a JSONL file containing GPT-generated queries for scientific papers
 and converts it to a Parquet dataset with the following columns:
-- paper_id: Identifier for the paper
-- query_type: Type of query (breadth: high_recall, balanced, or high_precision_distinctive)
-- query_text: The actual query text
-- similarity_scores: Empty list for now (placeholder for future use)
+- query_id: Unique integer identifier for each query (starting from 1)
+- query: The actual query text
 """
 
 import json
@@ -17,13 +15,12 @@ from pathlib import Path
 from typing import List, Dict, Any
 
 
-def parse_jsonl_file(filepath: str, relevance_indices: List[List[int]] | None = None) -> List[Dict[str, Any]]:
+def parse_jsonl_file(filepath: str) -> List[Dict[str, Any]]:
     """
     Parse a JSONL file containing GPT queries.
     
     Args:
         filepath: Path to the JSONL file
-        relevance_indices: Optional list of lists containing relevance indices for each query. Must have the same length as the total number of queries.
         
     Returns:
         List of dictionaries containing parsed data
@@ -46,8 +43,7 @@ def parse_jsonl_file(filepath: str, relevance_indices: List[List[int]] | None = 
                 # Extract each query
                 for query in gpt_queries['queries']:
                     records.append({
-                        'query': query['text'],
-                        'relevance_idx': []  # Will be filled later if relevance_indices provided
+                        'query': query['text']
                     })
                     
             except json.JSONDecodeError as e:
@@ -56,28 +52,17 @@ def parse_jsonl_file(filepath: str, relevance_indices: List[List[int]] | None = 
             except KeyError as e:
                 print(f"Warning: Missing key in line {line_num}: {e}")
                 continue
-    
-    # Fill in relevance indices if provided
-    if relevance_indices is not None:
-        if len(relevance_indices) != len(records):
-            raise ValueError(
-                f"Length mismatch: relevance_indices has {len(relevance_indices)} elements "
-                f"but there are {len(records)} query records"
-            )
-        for i, idx_list in enumerate(relevance_indices):
-            records[i]['relevance_idx'] = idx_list
                 
     return records
 
 
-def convert_to_parquet(input_file: str, output_file: str | None = None, relevance_indices: List[List[int]] | None = None):
+def convert_to_parquet(input_file: str, output_file: str | None = None):
     """
     Convert JSONL file to Parquet format.
     
     Args:
         input_file: Path to input JSONL file
         output_file: Path to output Parquet file (optional)
-        relevance_indices: Optional list of lists containing relevance indices for each query. Must have the same length as the total number of queries.
     """
     # Set default output filename if not provided
     if output_file is None:
@@ -87,7 +72,7 @@ def convert_to_parquet(input_file: str, output_file: str | None = None, relevanc
     print(f"Reading from: {input_file}")
     
     # Parse the JSONL file
-    records = parse_jsonl_file(input_file, relevance_indices)
+    records = parse_jsonl_file(input_file)
     
     if not records:
         print("Error: No records found in the input file")
@@ -97,6 +82,9 @@ def convert_to_parquet(input_file: str, output_file: str | None = None, relevanc
     
     # Create DataFrame
     df = pd.DataFrame(records)
+    
+    # Add query_id column (starting from 1)
+    df.insert(0, 'query_id', range(1, len(df) + 1))
     
     # Display some statistics
     print("\nDataset statistics:")
@@ -139,77 +127,9 @@ def main():
         return
     
     # relevance_indices = None  # Set to None to use empty lists for all queries
-
-    # Train (only paper)
-    # relevance_indices = [
-    #     [0,1,2,3,4,6,8,9],              # 1
-    #     [0,4,6],                        # 2
-    #     [0],                            # 3
-    #     [9],                            # 4
-    #     [1],                            # 5
-    #     [0,1,6],                        # 6
-    #     [0,1,2,4,6],                    # 7
-    #     [2],                            # 8
-    #     [0,2,4],                        # 9
-    #     [3],                            # 10
-    #     [3],                            # 11
-    #     [3],                            # 12
-    #     [4,6],                          # 13
-    #     [4],                            # 14
-    #     [4],                            # 15
-    #     [5],                            # 16
-    #     [5],                            # 17
-    #     [5],                            # 18
-    #     [0,1,2,4,6],                    # 19
-    #     [2,6],                          # 20
-    #     [6],                            # 21
-    #     [0,4,5,6,7,8],                  # 22
-    #     [7],                            # 23
-    #     [7],                            # 24
-    #     [8],                            # 25
-    #     [8],                            # 26
-    #     [8],                            # 27
-    #     [9],                            # 28
-    #     [9],                            # 29
-    #     [9],                            # 30
-    # ]
-
-    # Test (similarity aware)
-    relevance_indices = [
-        [0,4,6,7,8,9],                  # 1
-        [1,2,4,6,7],                    # 2
-        [0],                            # 3
-        [0,1,2,4,6,7,9],                # 4
-        [1,6,7],                        # 5
-        [1,6],                          # 6
-        [1,2,3,4,6,7,9],                # 7
-        [2,8],                          # 8
-        [2,5],                          # 9
-        [3],                            # 10
-        [3,4,9],                        # 11
-        [3],                            # 12
-        [],                             # 13
-        [4,9],                          # 14
-        [4,9],                          # 15
-        [5,6],                          # 16
-        [5],                            # 17
-        [5],                            # 18
-        [0,6],                          # 19
-        [3,4,5,6,7,8,9],                # 20
-        [6],                            # 21
-        [4,6,7,8],                      # 22
-        [7],                            # 23
-        [2,7,8],                        # 24
-        [7,8],                          # 25
-        [4,5,8],                        # 26
-        [8],                            # 27
-        [9],                            # 28
-        [9],                            # 29
-        [9],                            # 30
-    ]
     
     # Convert to Parquet
-    convert_to_parquet(args.input_file, args.output, relevance_indices)
+    convert_to_parquet(args.input_file, args.output)
 
 
 if __name__ == '__main__':
