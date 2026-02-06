@@ -16,8 +16,6 @@ from typing import Dict, Any
 def check_ollama_auth():
     """Check if Ollama API key is set."""
     api_key = os.environ.get('OLLAMA_API_KEY')
-    print(f"key: {api_key}")
-
     if not api_key:
         print("\n" + "="*80)
         print("ERROR: OLLAMA_API_KEY environment variable is not set!")
