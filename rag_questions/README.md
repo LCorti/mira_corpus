@@ -470,7 +470,8 @@ python create_qrels.py
 **Example Output Format**:
 
 ```
-query-id | corpus-id | score------|-----------|------
+query-id | corpus-id | score
+---------|-----------|------
 1        | 0         | 1
 1        | 1         | 1
 ```
