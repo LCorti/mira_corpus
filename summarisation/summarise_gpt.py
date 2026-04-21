@@ -5,20 +5,23 @@ import utils
 from evaluate import load
 from pathlib import Path
 
+DO_BERT = False
+
 if __name__ == "__main__":
     # Load papers
-    papers_path = Path(".", "data_scisumm", "cl_scisumm.jsonl")
+    papers_path = Path(".", "raw_data", "cl_scisumm.jsonl")
     papers = utils.load_jsonl(papers_path)
-    """
+    """ Structure
     [{
-        "paper_id: "<ACL_paper_id>",
-        "text": "...",
+        "paper_id: "<ACL_paper_id>",su
         "abstract": "...",
-        "human": "..."
+        "full_text": "...",
+        "human_summary": "...",
+        "gpt_summary": "..." <- to add
     }]
     """
-    # Load summaries
-    summaries_path = Path(".", "data_scisumm", "gpt_summaries.jsonl")
+    # Load existing summaries
+    summaries_path = Path(".", "summarisation", "summarisation_corpus.jsonl")
     try:
         summaries = utils.load_jsonl(summaries_path)
         processed_ids = [s["paper_id"] for s in summaries]
@@ -28,7 +31,8 @@ if __name__ == "__main__":
 
     # Generation options
     gen_options = {"num_ctx": 130000}
-    bertscore = load("bertscore")
+    if DO_BERT:
+        bertscore = load("bertscore")
 
     for paper in papers:
         if paper["paper_id"] in processed_ids:
@@ -39,7 +43,7 @@ if __name__ == "__main__":
         to_save = paper.copy()
 
         # Get summary from gpt-oss
-        prompt = utils.build_prompt(paper["text"], task="summarisation")
+        prompt = utils.build_prompt(paper["full_text"], task="summarisation")
         # This is a very hacky solution but for now it should do the job.
         try:
             response = ollama.generate(
@@ -55,15 +59,16 @@ if __name__ == "__main__":
             )
         to_save["gpt_summary"] = response["response"]
 
-        # Compute generation performance with human summary
-        scores = bertscore.compute(
-            predictions=[to_save["gpt_summary"]],
-            references=[paper["human"]],
-            lang="en",
-            model_type="microsoft/deberta-xlarge-mnli",
-        )
-        to_save["f1"] = scores["f1"][0]
-        print(f"BERTScore (F1) between gpt-oss and human: {to_save['f1']:.2f}.")
+        if DO_BERT:
+            # Compute generation performance with human summary
+            scores = bertscore.compute(
+                predictions=[to_save["gpt_summary"]],
+                references=[paper["human_summary"]],
+                lang="en",
+                model_type="microsoft/deberta-xlarge-mnli",
+            )
+            to_save["f1"] = scores["f1"][0]
+            print(f"BERTScore (F1) between gpt-oss and human: {to_save['f1']:.2f}.")
 
         # Save gpt summary + metric
         utils.append_to_jsonl(to_save, summaries_path)
