@@ -33,37 +33,10 @@ Scripts are organized by workflow phase. Each script includes detailed parameter
 
 ### 1.1 `extract_titles_and_abstracts.py`
 
-**Purpose**: Extract title and abstract fields from the `text` field in corpus files.
-
-**Functionality**:
-
-- Parses structured text to extract titles (between `Title:` and `ABSTRACT`)
-- Extracts abstracts (between `ABSTRACT` and `SECTION 1:`)
-- Creates separate `title` and `abstract` fields while preserving original `text`
-
-**Input**:
-
-- `data_scisumm/corpus.jsonl` (or specified input file)
-
-**Output**:
-
-- `data_scisumm/corpus_temp.jsonl` (processed file with extracted fields)
-
-**Usage**:
-
-```bash
-python extract_titles_and_abstracts.py
-```
-
-**Parameters**: None (hardcoded paths in script)
-
-**Warnings**:
-
-- Input file must have structured format with `Title:`, `ABSTRACT`, and `SECTION 1:` markers
-- Prints warnings for papers where extraction fails
+> Removed: abstract were already present and title extraction has been merged to the initial pre-processing.
 
 
-### 1.2 `facets.py`
+#### 1.2 `facets.py`
 
 **Purpose**: Analyze semantic facets for each paper relative to its neighbors using NLP and TF-IDF.
 
