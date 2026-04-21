@@ -1,7 +1,7 @@
 # Directory structure
 
 ```
-data_scisumm
+raw_data
 +--Development-Set-Apr8             // 10 reference papers X citing papers
 |   +--[ACL Anthology Paper ID]
 |   |   +--annotation
