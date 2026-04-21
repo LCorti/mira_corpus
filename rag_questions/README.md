@@ -525,42 +525,7 @@ python convert_gpt_queries_to_parquet.py input.jsonl output.parquet
 
 ### 4.5 `convert_to_parquet.py`
 
-**Purpose**: Convert scientific paper summaries from JSONL to Parquet for Hugging Face datasets.
-
-**Functionality**:
-
-- Supports two formats: `gpt_simplified.jsonl` and `gpt_summaries.jsonl`
-- Extracts title from text field
-- Creates columns: paper_id, title, abstract, full_text, human_summary, gpt_simplified_summary/gpt_summary
-- Optional random sampling
-
-**Input**:
-
-- `data_scisumm/gpt_simplified.jsonl` or `data_scisumm/gpt_summaries.jsonl`
-
-**Output**:
-
-- Parquet file (default: `parquet/scientific_papers_dataset.parquet`)
-
-**Usage**:
-
-```bash
-# Convert simplified format
-python convert_to_parquet.py -i data_scisumm/gpt_simplified.jsonl -o output.parquet -f simplified
-
-# Convert summaries format
-python convert_to_parquet.py -i data_scisumm/gpt_summaries.jsonl -o output.parquet -f summaries
-
-# Random sample of 100 papers
-python convert_to_parquet.py -i input.jsonl -o output.parquet -n 100
-```
-
-**Parameters**:
-
-- `--input, -i FILE`: Input JSONL file path (default: `data_scisumm/gpt_simplified.jsonl`)
-- `--output, -o FILE`: Output Parquet file path (default: `parquet/scientific_papers_dataset.parquet`)
-- `--format, -f {simplified,summaries}`: Input format type (default: `simplified`)
-- `--num-samples, -n N`: Random sample size (default: all papers)
+> Deleted. Moved outside as a utility.
 
 
 ## Execution Order
