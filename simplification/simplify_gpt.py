@@ -11,6 +11,7 @@ if __name__ == "__main__":
     """
     [{
         "paper_id: "<ACL_paper_id>",
+        "title": "...",
         "full_text": "...",
         "abstract": "...",
         "human_summary": "...",

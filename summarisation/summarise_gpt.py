@@ -13,7 +13,8 @@ if __name__ == "__main__":
     papers = utils.load_jsonl(papers_path)
     """ Structure
     [{
-        "paper_id: "<ACL_paper_id>",su
+        "paper_id: "<ACL_paper_id>",
+        "title": "...",
         "abstract": "...",
         "full_text": "...",
         "human_summary": "...",
