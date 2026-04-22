@@ -102,7 +102,7 @@ python generate_paper_only_prompts.py
 }
 ```
 
-### 2.2 `generate_similarity_aware_prompts.py`
+#### 2.2 `generate_similarity_aware_prompts.py`
 
 **Functionality**:
 
@@ -133,7 +133,7 @@ python generate_similarity_aware_prompts.py
 - Requires facets to be generated first (run `facets.py`)
 - Skips papers without facet data
 
-### 2.3 `generate_questions_gpt.py`
+#### 2.3 `generate_questions_gpt.py`
 
 **Functionality**:
 
@@ -168,9 +168,9 @@ python generate_questions_gpt.py
 - Automatically sleeps 30 minutes if hitting hourly rate limits
 - Resumes from where it left off (checks existing output file)
 
-## Phase 3: Evaluation & Analysis
+### Phase 3: Evaluation & Analysis
 
-### 3.1 `evaluate_question_answerability.py`
+#### 3.1 `evaluate_question_answerability.py`
 
 > Use with similarity-aware data.
 
@@ -225,9 +225,7 @@ python evaluate_question_answerability.py --output-suffix "_machine2"
 - Papers >32K chars are truncated
 
 
-### 3.2 `analyze_question_paper_similarity.py`
-
-**Purpose**: Calculate semantic similarity between papers and generated questions using embeddings.
+#### 3.2 `analyze_question_paper_similarity.py`
 
 **Functionality**:
 
