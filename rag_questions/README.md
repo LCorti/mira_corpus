@@ -387,9 +387,7 @@ python generate_relevance_indices.py
 - Reports questions without any relevant papers (should be 0)
 
 
-### 4.2 `create_qrels.py`
-
-**Purpose**: Create qrels (query relevance) Parquet datasets for train/test splits.
+#### 4.2 `make_qrels_parquet.py`
 
 **Functionality**:
 
@@ -424,9 +422,7 @@ query-id | corpus-id | score
 ```
 
 
-### 4.3 `convert_papers_to_parquet.py`
-
-**Purpose**: Convert selected papers from JSONL to Parquet format.
+#### 4.3 `make_corpus_parquet.py`
 
 **Functionality**:
 
@@ -436,26 +432,26 @@ query-id | corpus-id | score
 
 **Input**:
 
-- `data/selected_papers.jsonl`
+- `raw_data/cl_scisumm.jsonl`
 
 **Output**:
 
-- Parquet file (default: `selected_papers.parquet`)
+- Parquet file (default: `out_file.parquet`); will be saved in the `parquet` folder.
 
 **Usage**:
 
 ```bash
 # Basic usage
-python convert_papers_to_parquet.py
+python make_corpus_parquet.py --input_file raw_data/cl_scisumm.jsonl
 
-# Specify custom paths
-python convert_papers_to_parquet.py --input data/custom.jsonl --output output.parquet
+# Specify custom output path
+python make_corpus_parquet.py --input_file raw_data/cl_scisumm.jsonl --output_file output.parquet
 ```
 
 **Parameters**:
 
-- `--input FILE`: Input JSONL file path
-- `--output FILE`: Output Parquet file path
+- `--input_file FILE`: Input JSONL file path
+- `--output_file FILE`: Output Parquet file path
 
 
 ### 4.4 `convert_gpt_queries_to_parquet.py`
