@@ -6,6 +6,7 @@ from pathlib import Path
 
 if __name__ == "__main__":
     # Load papers
+    # prompt_path = Path(".", "data", "prompts_similarity_aware.jsonl")
     prompt_path = Path(".", "data", "prompts_paper_only.jsonl")
     prompt_objects = utils.load_jsonl(prompt_path)
     """
@@ -15,7 +16,8 @@ if __name__ == "__main__":
         "prompt": "<full paper text>"
     }]
     """
-    # Load simplified papers
+    # Load generated questions
+    # questions_path = Path(".", "data", "gpt_questions_similarity_aware.jsonl")
     questions_path = Path(".", "data", "gpt_questions_paper_only.jsonl")
     try:
         questions = utils.load_jsonl(questions_path)

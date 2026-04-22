@@ -162,7 +162,8 @@ python generate_questions_gpt.py
 **Parameters**:
 
 - `num_ctx`: `130000` (context window size for LLM)
-- `prompt_path`: `prompts_paper_only.jsonl` (can change to `prompts_similarity_aware.jsonl`)
+- `prompt_path`: `prompts_paper_only.jsonl` (or `prompts_similarity_aware.jsonl`)
+- `questions_path`: `gpt_questions_paper_only.jsonl` (or `gpt_questions_similarity_aware.jsonl`)
 
 **Warnings**:
 
