@@ -454,9 +454,7 @@ python make_corpus_parquet.py --input_file raw_data/cl_scisumm.jsonl --output_fi
 - `--output_file FILE`: Output Parquet file path
 
 
-### 4.4 `convert_gpt_queries_to_parquet.py`
-
-**Purpose**: Convert GPT-generated queries from JSONL to Parquet format.
+#### 4.4 `make_queries_parquet.py`
 
 **Functionality**:
 
@@ -470,22 +468,22 @@ python make_corpus_parquet.py --input_file raw_data/cl_scisumm.jsonl --output_fi
 
 **Output**:
 
-- Parquet file (default: same name with `.parquet` extension)
+- Parquet file (default: same name with `.parquet` extension); will be saved in the `parquet` folder.
 
 **Usage**:
 
 ```bash
 # Basic usage
-python convert_gpt_queries_to_parquet.py input.jsonl
+python make_queries_parquet.py --input_file input_file.jsonl
 
 # Specify output path
-python convert_gpt_queries_to_parquet.py input.jsonl output.parquet
+python make_queries_parquet.py --input_file input_file.jsonl --output_file out_file.parquet
 ```
 
 **Parameters**:
 
-- `input_file`: Path to input JSONL file (required)
-- `output_file`: Path to output Parquet file (optional)
+- `--input_file FILE`: Input JSONL file path
+- `--output_file FILE`: Output Parquet file path
 
 **Warnings**:
 
