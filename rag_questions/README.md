@@ -147,11 +147,11 @@ python generate_similarity_aware_prompts.py
 
 **Input**:
 
-- `data_scisumm/ollama_prompt_paper_only.jsonl` (or similarity_aware variant)
+- `data/prompts_paper_only.jsonl` (or similarity_aware variant)
 
 **Output**:
 
-- `data_scisumm/gpt_questions_paper_only.jsonl` (or similarity_aware variant)
+- `data/gpt_questions_paper_only.jsonl` (or similarity_aware variant)
 
 **Usage**:
 
@@ -161,14 +161,14 @@ python generate_questions_gpt.py
 
 **Parameters**:
 
-- `num_ctx`: 130000 (context window size for LLM)
+- `num_ctx`: `130000` (context window size for LLM)
+- `prompt_path`: `prompts_paper_only.jsonl` (can change to `prompts_similarity_aware.jsonl`)
 
 **Warnings**:
 
 - Requires Ollama API access
 - Automatically sleeps 30 minutes if hitting hourly rate limits
 - Resumes from where it left off (checks existing output file)
-
 
 ## Phase 3: Evaluation & Analysis
 

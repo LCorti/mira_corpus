@@ -6,7 +6,7 @@ from pathlib import Path
 
 if __name__ == "__main__":
     # Load papers
-    prompt_path = Path(".", "data_scisumm", "ollama_prompt_paper_only.jsonl")
+    prompt_path = Path(".", "data", "prompts_paper_only.jsonl")
     prompt_objects = utils.load_jsonl(prompt_path)
     """
     [{
@@ -16,7 +16,7 @@ if __name__ == "__main__":
     }]
     """
     # Load simplified papers
-    questions_path = Path(".", "data_scisumm", "gpt_questions_paper_only.jsonl")
+    questions_path = Path(".", "data", "gpt_questions_paper_only.jsonl")
     try:
         questions = utils.load_jsonl(questions_path)
         processed_ids = [q["paper_id"] for q in questions]
