@@ -354,11 +354,9 @@ python analyze_similarity_scores.py
 - Hardcoded path to similarity file (modify in `main()` if needed)
 
 
-## Phase 4: Dataset Conversion & Export
+### Phase 4: Dataset Conversion & Export
 
-### 4.1 `generate_relevance_indices.py`
-
-**Purpose**: Generate relevance indices for document retrieval evaluation based on LLM judgments.
+#### 4.1 `generate_relevance_indices.py`
 
 **Functionality**:
 
@@ -368,8 +366,8 @@ python analyze_similarity_scores.py
 
 **Input**:
 
-- `rag_questions/data/selected_papers.jsonl`
-- `rag_questions/data/question_answerability_evaluations_similarity_aware.jsonl`
+- `data/selected_papers.jsonl`
+- `data/question_answerability_evals_similarity_aware.jsonl`
 
 **Output**:
 
