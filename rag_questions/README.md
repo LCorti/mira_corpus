@@ -70,12 +70,9 @@ python make_facet_terms.py
 - Papers without `relevance` scores will be skipped
 - Optimised for ~10 paper corpus (adjust thresholds for larger datasets)
 
+### Phase 2: Question Generation
 
-## Phase 2: Question Generation
-
-### 2.1 `generate_paper_only_prompts.py`
-
-**Purpose**: Generate prompts for query generation using only target paper information.
+#### 2.1 `generate_paper_only_prompts.py`
 
 **Functionality**:
 
@@ -85,11 +82,11 @@ python make_facet_terms.py
 
 **Input**:
 
-- `data_scisumm/selected_papers.jsonl`
+- `data/selected_papers.jsonl`
 
 **Output**:
 
-- `data_scisumm/ollama_prompt_paper_only.jsonl`
+- `data/prompts_paper_only.jsonl`
 
 **Usage**:
 
@@ -108,10 +105,7 @@ python generate_paper_only_prompts.py
 }
 ```
 
-
 ### 2.2 `generate_similarity_aware_prompts.py`
-
-**Purpose**: Generate prompts that incorporate semantic facets from similar papers.
 
 **Functionality**:
 
@@ -122,12 +116,12 @@ python generate_paper_only_prompts.py
 
 **Input**:
 
-- `data_scisumm/selected_papers.jsonl` (with `relevance` field)
-- `data_scisumm/facet_analysis_results.jsonl`
+- `data/selected_papers.jsonl` (with `relevance` field)
+- `data/facet_analysis_results.jsonl`
 
 **Output**:
 
-- `data_scisumm/ollama_prompt_similarity_aware.jsonl`
+- `data/prompts_similarity_aware.jsonl`
 
 **Usage**:
 
@@ -142,10 +136,7 @@ python generate_similarity_aware_prompts.py
 - Requires facets to be generated first (run `facets.py`)
 - Skips papers without facet data
 
-
 ### 2.3 `generate_questions_gpt.py`
-
-**Purpose**: Execute LLM query generation using generated prompts.
 
 **Functionality**:
 
