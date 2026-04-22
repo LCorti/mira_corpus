@@ -26,19 +26,14 @@ This directory contains scripts for generating and evaluating questions for Retr
 
 ## Scripts Overview
 
-Scripts are organized by workflow phase. Each script includes detailed parameter documentation below.
+### 1. Data Preparation
 
-
-## Phase 1: Data Preparation
-
-### 1.1 `extract_titles_and_abstracts.py`
+#### 1.1 `extract_titles_and_abstracts.py`
 
 > Removed: abstract were already present and title extraction has been merged to the initial pre-processing.
 
 
-#### 1.2 `facets.py`
-
-**Purpose**: Analyze semantic facets for each paper relative to its neighbors using NLP and TF-IDF.
+#### 1.2 `make_facet_terms.py`
 
 **Functionality**:
 
@@ -49,17 +44,17 @@ Scripts are organized by workflow phase. Each script includes detailed parameter
 
 **Input**:
 
-- `data_scisumm/selected_papers.jsonl` (papers with `relevance` scores for neighbors)
+- `data/selected_papers.jsonl` (papers with `relevance` scores for neighbors)
 
 **Output**:
 
-- `data_scisumm/facet_analysis_results.jsonl` (facets for each paper)
-- `data_scisumm/facet_analysis_summary.json` (statistics)
+- `data/facet_analysis_results.jsonl` (facets for each paper)
+- `data/facet_analysis_summary.json` (statistics)
 
 **Usage**:
 
 ```bash
-python facets.py
+python make_facet_terms.py
 ```
 
 **Parameters**:
@@ -73,7 +68,7 @@ python facets.py
 
 - Requires SpaCy model: `python -m spacy download en_core_web_sm`
 - Papers without `relevance` scores will be skipped
-- Optimized for ~10 paper corpus (adjust thresholds for larger datasets)
+- Optimised for ~10 paper corpus (adjust thresholds for larger datasets)
 
 
 ## Phase 2: Question Generation
