@@ -170,7 +170,7 @@ python generate_questions_gpt.py
 
 ### Phase 3: Evaluation & Analysis
 
-#### 3.1 `evaluate_question_answerability.py`
+#### 3.1 `analyze_question_answerability.py`
 
 > Use with similarity-aware data.
 
@@ -194,19 +194,19 @@ python generate_questions_gpt.py
 
 ```bash
 # Standard usage
-python evaluate_question_answerability.py
+python analyze_question_answerability.py
 
 # Advanced: Process in reverse order
-python evaluate_question_answerability.py --reverse
+python analyze_question_answerability.py --reverse
 
 # Advanced: Process specific range
-python evaluate_question_answerability.py --start-idx 0 --end-idx 50
+python analyze_question_answerability.py --start-idx 0 --end-idx 50
 
 # Advanced: Limit to first N papers
-python evaluate_question_answerability.py --limit 100
+python analyze_question_answerability.py --limit 100
 
 # Advanced: Add suffix to output filename
-python evaluate_question_answerability.py --output-suffix "_machine2"
+python analyze_question_answerability.py --output-suffix "_machine2"
 ```
 
 **Parameters**:
@@ -371,8 +371,8 @@ python analyze_similarity_scores.py
 
 **Output**:
 
-- `rag_questions/data/relevance_indices.py` (Python list variable)
-- `rag_questions/output/similarity_aware/relevance_indices_statistics.txt`
+- `data/relevance_indices.py` (Python list variable)
+- `output/similarity_aware/relevance_indices_statistics.txt`
 
 **Usage**:
 
@@ -491,92 +491,51 @@ python make_queries_parquet.py --input_file input_file.jsonl --output_file out_f
 - Shows count of unique queries (detects duplicates)
 
 
-### 4.5 `convert_to_parquet.py`
+## Execution Order for Similarity-Aware Questions
 
-> Deleted. Moved outside as a utility.
-
-
-## Execution Order
-
-### Standard Workflow (Similarity-Aware Questions)
-
-The following order ensures all dependencies are satisfied:
-
-#### **Step 1: Data Preparation**
+### **Step 1: Data Preparation**
 
 ```bash
-# 1. Extract titles and abstracts (if not already present)
-python extract_titles_and_abstracts.py
-
-# 2. Generate semantic facets for each paper
-python facets.py
+# 1. Generate semantic facets for each paper
+python extract_facet_terms.py
 ```
 
-#### **Step 2: Generate Questions**
+### **Step 2: Generate Questions**
 
 ```bash
-# 3. Create prompts with facet information
+# 2. Create prompts with facet information
 python generate_similarity_aware_prompts.py
 
-# 4. Generate questions using LLM
+# 3. Generate questions using LLM
 python generate_questions_gpt.py
 ```
 
-#### **Step 3: Evaluate & Analyze**
+### **Step 3: Evaluate & Analyze**
 
 ```bash
-# 5. Calculate semantic similarity between papers and questions
+# 4. Calculate semantic similarity between papers and questions
 python analyze_question_paper_similarity.py
 
-# 6. Evaluate answerability (slow - full matrix)
-python evaluate_question_answerability.py
+# 5. Evaluate answerability (slow - full matrix)
+python analyze_question_answerability.py
 
-# 7. Analyze overlap between similarity and answerability
+# 6. Analyze overlap between similarity and answerability
 python analyze_similarity_answerability_overlap.py
 
-# 8. Generate relevance indices from answerability judgments
+# 7. Generate relevance indices from answerability judgments
 python generate_relevance_indices.py
 ```
 
-#### **Step 4: Export Datasets**
+### **Step 4: Export Datasets**
 
 ```bash
-# 9. Create qrels for training/evaluation
-python create_qrels.py
+# 8. Create qrels for training/evaluation
+python make_qrels_parquet.py
 
-# 10. Convert to Parquet format for model training
-python convert_papers_to_parquet.py
-python convert_gpt_queries_to_parquet.py
+python make_corpus_parquet.py
+
+python make_queries_parquet.py
 ```
-
-
-### Alternative Workflow (Paper-Only Questions)
-
-For baseline comparison without similarity information:
-
-```bash
-# 1. Extract titles/abstracts (same as above)
-python extract_titles_and_abstracts.py
-
-# 2. Generate paper-only prompts
-python generate_paper_only_prompts.py
-
-# 3. Generate questions (modify script to use paper-only prompts)
-python generate_questions_gpt.py
-
-# 4-10. Follow same evaluation/analysis/export steps
-```
-
-
-### Comparison Workflow
-
-To compare both approaches:
-
-```bash
-# After running both workflows above:
-python analyze_query_differences.py
-```
-
 
 ## Dependency Graph
 
@@ -591,7 +550,7 @@ generate_questions_gpt.py
     ↓
     ├─→ analyze_question_paper_similarity.py
     │       ↓
-    └─→ evaluate_question_answerability.py
+    └─→ analyze_question_answerability.py
             ↓
             ├─→ analyze_similarity_answerability_overlap.py
             └─→ generate_relevance_indices.py
@@ -606,7 +565,6 @@ generate_questions_gpt.py
 
 - `analyze_query_differences.py` (compares two question sets)
 - `analyze_similarity_scores.py` (analyzes paper-paper similarity)
-- `convert_to_parquet.py` (converts summary files)
 
 
 ## Requirements
@@ -620,63 +578,7 @@ python -m spacy download en_core_web_sm
 
 ### Environment Variables
 
-- `OLLAMA_API_KEY`: Required for `evaluate_question_answerability.py` and `generate_questions_gpt.py`
-
-
-## Common Use Cases
-
-### 1. Generate Questions for New Papers
-
-```bash
-# Add papers to selected_papers.jsonl with relevance scores
-python facets.py
-python generate_similarity_aware_prompts.py
-python generate_questions_gpt.py
-```
-
-### 2. Evaluate Question Quality
-
-```bash
-python analyze_question_paper_similarity.py
-python evaluate_question_answerability.py  # Warning: very slow!
-python analyze_similarity_answerability_overlap.py
-```
-
-### 3. Export for Model Training
-
-```bash
-python generate_relevance_indices.py
-python create_qrels.py
-python convert_papers_to_parquet.py
-python convert_gpt_queries_to_parquet.py
-```
-
-
-## Troubleshooting
-
-**Issue**: `OLLAMA_API_KEY not set`
-
-- **Solution**: Set environment variable before running LLM scripts
-
-  ```bash
-  export OLLAMA_API_KEY="your_key_here"
-  ```
-
-**Issue**: SpaCy model not found
-
-- **Solution**: Download the model
-
-  ```bash
-  python -m spacy download en_core_web_sm
-  ```
-
-**Issue**: Out of memory during similarity calculation
-
-- **Solution**: Script automatically truncates papers >32K characters, but reduce batch size if needed
-
-**Issue**: Rate limit errors with Ollama
-
-- **Solution**: Scripts automatically sleep for 30 minutes and retry
+- `OLLAMA_API_KEY`: Required.
 
 
 ## Notes
@@ -687,8 +589,5 @@ python convert_gpt_queries_to_parquet.py
 - Similarity scores are cosine similarity (range: 0-1)
 - Answerability judgments are binary: "yes" or "no"
 - Most scripts resume from where they left off (check for existing output files)
-
-
-## Author & Citation
-
-This pipeline was developed for RAG research on scientific papers from the ACL anthology. If you use this code, please cite the relevant papers and datasets (CL-SciSumm, ACL-OCL).
+- Depending on your Ollama subscription, you might hit limits quicker (or not)
+- Download the SpaCy model beforehand
