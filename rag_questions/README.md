@@ -30,7 +30,7 @@ We implement two query and relevance judgement generation workflows: **paper-onl
 > Removed: abstract were already present and title extraction has been merged to the initial pre-processing.
 
 
-#### 1.2 `make_facet_terms.py`
+#### 1.2 `extract_facet_terms.py`
 
 **Functionality**:
 
