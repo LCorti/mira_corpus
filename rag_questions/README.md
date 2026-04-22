@@ -175,7 +175,7 @@ python generate_questions_gpt.py
 
 ### 3.1 `evaluate_question_answerability.py`
 
-**Purpose**: Evaluate whether each paper can answer each question using LLM judgments.
+> Use with similarity-aware data.
 
 **Functionality**:
 
@@ -186,12 +186,12 @@ python generate_questions_gpt.py
 
 **Input**:
 
-- `data_scisumm/cl_scisumm.jsonl` (all papers)
+- `raw_data/cl_scisumm.jsonl` (all papers)
 - `data/gpt_questions_similarity_aware.jsonl`
 
 **Output**:
 
-- `data/question_answerability_evaluations_similarity_aware_full.jsonl`
+- `data/question_answerability_evals_similarity_aware_full.jsonl`
 
 **Usage**:
 
