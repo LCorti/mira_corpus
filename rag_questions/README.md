@@ -1,17 +1,14 @@
-# RAG Questions Pipeline
+# Generating data for retrieval/reranking setting
 
-This directory contains scripts for generating and evaluating questions for Retrieval-Augmented Generation (RAG) on scientific papers from the ACL anthology. The workflow supports two question generation approaches: **paper-only** (using only target paper information) and **similarity-aware** (using semantic facets derived from similar papers).
-
+We implement two query and relevance judgement generation workflows: **paper-only** (using only target paper as context) and **similarity-aware** (using semantic facets derived from similar papers).
 
 ## Directory Structure
-
-### Subdirectories
 
 - **`data/`** - Contains all input/output data files:
   - Input: `selected_papers.jsonl`, `facet_analysis_results.jsonl`
   - Generated questions: `gpt_questions_paper_only.jsonl`, `gpt_questions_similarity_aware.jsonl`
-  - Prompts: `ollama_prompt_paper_only.jsonl`, `ollama_prompt_similarity_aware.jsonl`
-  - Evaluations: `question_answerability_evaluations_*.jsonl`
+  - Prompts: `prompts_paper_only.jsonl`, `prompts_similarity_aware.jsonl`
+  - Evaluations: `question_answerability_evals_*.jsonl`
   - Other: `gpt_simplified.jsonl`, `gpt_summaries.jsonl`, `relevance_indices.py`
 
 - **`output/`** - Contains analysis results and visualizations:
