@@ -1,9 +1,6 @@
 import json
 
 file_names = [
-    "question_answerability_evals_paper_only.jsonl",
-    "question_answerability_evals_similarity_aware_full_laptop.jsonl",
-    "question_answerability_evals_similarity_aware_full_lorenzo.jsonl",
     "question_answerability_evals_similarity_aware.jsonl",
 ]
 
@@ -30,3 +27,4 @@ for fn in file_names:
     print(f" - Unique paper ids: {len(curr_ids)}.")
     print("=" * 40)
     print(f"All unique ids: {len(all_ids)}")
+    print("=" * 40)

@@ -9,7 +9,6 @@ We implement two query and relevance judgement generation workflows: **paper-onl
   - Generated questions: `gpt_questions_paper_only.jsonl`, `gpt_questions_similarity_aware.jsonl`
   - Prompts: `prompts_paper_only.jsonl`, `prompts_similarity_aware.jsonl`
   - Evaluations: `question_answerability_evals_*.jsonl`
-  - Other: `gpt_simplified.jsonl`, `gpt_summaries.jsonl`, `relevance_indices.py`
 
 - **`output/`** - Contains analysis results and visualizations:
   - Text reports and statistics
