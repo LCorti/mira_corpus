@@ -1,8 +1,9 @@
-import ollama
 import time
-import utils
-
 from pathlib import Path
+
+import ollama
+
+import utils
 
 if __name__ == "__main__":
     # Load papers

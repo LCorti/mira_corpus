@@ -8,10 +8,10 @@ This script generates qrels parquet files with the following columns:
 - score: Binary relevance score (1 for relevant)
 """
 
-import pandas as pd
-
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import Any, Dict, List
+
+import pandas as pd
 
 
 def create_qrels_records(relevance_indices: List[List[int]]) -> List[Dict[str, Any]]:

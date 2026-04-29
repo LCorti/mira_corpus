@@ -1,9 +1,10 @@
-import ollama
 import time
-import utils
-
-from evaluate import load
 from pathlib import Path
+
+import ollama
+from evaluate import load
+
+import utils
 
 DO_BERT = False
 

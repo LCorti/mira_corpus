@@ -1,12 +1,12 @@
 import json
 import math
 import re
-import spacy
-
 from collections import Counter
 from pathlib import Path
-from sklearn.feature_extraction.text import TfidfVectorizer
 from typing import List, Tuple
+
+import spacy
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 # ----------------------------
 # 1) Setup

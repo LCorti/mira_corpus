@@ -1,13 +1,13 @@
 import argparse
 import json
-import ollama
 import os
 import sys
 import time
-
 from pathlib import Path
+from typing import Any, Dict
+
+import ollama
 from tqdm import tqdm
-from typing import Dict, Any
 
 # Add parent directory to path to import utils
 sys.path.insert(0, str(Path(__file__).parent.parent))

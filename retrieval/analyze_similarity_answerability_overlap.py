@@ -9,12 +9,12 @@ Goal: Determine if high similarity correlates with answerability, and ensure eac
 """
 
 import json
-import matplotlib.pyplot as plt
-import numpy as np
-
 from collections import defaultdict
 from pathlib import Path
 from typing import Dict, Tuple
+
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 def parse_similarity_file(file_path: Path) -> Dict[str, Dict[str, float]]:

@@ -6,7 +6,6 @@ Excludes self-similarity (score = 1.0)
 """
 
 import json
-
 from collections import defaultdict
 from pathlib import Path
 

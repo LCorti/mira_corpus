@@ -1,7 +1,8 @@
-import numpy as np
-import utils
-
 from pathlib import Path
+
+import numpy as np
+
+import utils
 
 if __name__ == "__main__":
     # Load summaries to sample

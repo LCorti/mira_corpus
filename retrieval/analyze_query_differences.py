@@ -4,7 +4,6 @@ Analyze the differences between paper_only and similarity_aware generated querie
 """
 
 import json
-
 from pathlib import Path
 from typing import Dict, List
 

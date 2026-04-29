@@ -10,10 +10,10 @@ and converts it to a Parquet dataset with the following columns:
 
 import argparse
 import json
-import pandas as pd
-
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import Any, Dict, List
+
+import pandas as pd
 
 
 def parse_jsonl_file(filepath: str) -> List[Dict[str, Any]]:

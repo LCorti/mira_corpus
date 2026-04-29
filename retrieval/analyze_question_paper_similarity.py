@@ -4,18 +4,17 @@ Creates a heatmap showing how related each question is to each paper.
 """
 
 import json
+import sys
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
-import sys
-
-from pathlib import Path
 from sentence_transformers import SentenceTransformer
 
 # Add parent directory to path to import utils
 sys.path.insert(0, str(Path(__file__).parent.parent))
 import utils
-
 
 # Load papers and questions
 selected_papers_path = Path("data", "selected_papers.jsonl")

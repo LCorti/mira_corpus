@@ -1,12 +1,13 @@
 import json
-from datasets import load_dataset
 from pathlib import Path
+
+from datasets import load_dataset
 
 """
 Script to load from HF and check that the summarisation data is present correctly.
 """
 
-if __name__=="__main__":
+if __name__ == "__main__":
     ds_name = "dtk-llms/mira_summarization"
     ds = load_dataset(ds_name)
     paper_ids = {}
@@ -27,17 +28,18 @@ if __name__=="__main__":
     out_file = Path("summarisation", "summ_corpus_test.jsonl")
 
     for paper in ds["test"]:
-        data.append({
-            "paper_id": paper["paper_id"],
-            "title": paper["title"],
-            "abstract": paper["abstract"],
-            "full_text": paper["full_text"],
-            "human_summary": paper["human_summary"],
-            "gpt_summary": paper["gpt_summary"]
-            })
+        data.append(
+            {
+                "paper_id": paper["paper_id"],
+                "title": paper["title"],
+                "abstract": paper["abstract"],
+                "full_text": paper["full_text"],
+                "human_summary": paper["human_summary"],
+                "gpt_summary": paper["gpt_summary"],
+            }
+        )
 
     with open(out_file, "a", encoding="utf-8") as fp:
         for paper in data:
             fp.write(json.dumps(paper))
             fp.write("\n")
-
