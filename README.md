@@ -1,4 +1,4 @@
-# MIRA -- User Study Corpus Processing
+# Corpus Processing for MIRA User Study
 
 This repository contains the code to load, pre-process, and upload to Hugging Face the corpus used in the evaluation of MIRA.
 
