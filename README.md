@@ -8,7 +8,7 @@ Check out our work here:
 TBA
 ```
 
-Check out the MIRA codebase here: [TBA]()
+Check out the MIRA codebase here: [LCorti/mira_codebase/](https://github.com/LCorti/mira_codebase/).
 
 ## Corpus details
 
